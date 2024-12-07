@@ -1956,3 +1956,87 @@ public:
 };
 ```
 
+### [530. 二叉搜索树的最小绝对差](https://leetcode.cn/problems/minimum-absolute-difference-in-bst/)
+
+```C++
+class Solution {
+public:
+    int diff = INT_MAX;
+    
+    int helper(TreeNode * root,int & val){
+        if(root == nullptr) return diff;
+        
+        int left = helper(root->left,val);
+        
+        if(abs(root->val - val) < diff){
+            diff = abs(root->val - val);
+        }
+        
+        val = root->val;
+        
+        int right = helper(root->right,val);
+        
+        return min(left,right);
+    }
+    
+    int getMinimumDifference(TreeNode* root) {
+        int val = 0x3fff;
+        return helper(root,val);
+    }
+};
+```
+
+### [501. 二叉搜索树中的众数](https://leetcode.cn/problems/find-mode-in-binary-search-tree/)
+
+```C++
+class Solution {
+public:
+    
+    vector<int> result;
+    
+    int maxNums = 1;
+    int count = 0;
+    TreeNode * pre = nullptr;
+    
+    void preOrder(TreeNode * root){
+        if(root == nullptr) {
+            return;
+        }
+            
+        preOrder(root->left);   
+        
+        if(pre == nullptr){
+       		count++;
+        }else{
+            if(root->val == pre->val){
+                count++;
+            }else{
+                if(count > maxNums){
+                	result.clear();
+                	result.push_back(pre->val);
+                    maxNums = count;
+           		}else if(count == maxNums){
+                	result.push_back(pre->val);
+                }
+                count = 1;
+            }
+        }
+        pre = root;
+        preOrder(root->right);
+    }
+    
+    vector<int> findMode(TreeNode* root) {
+        preOrder(root);
+        if(count > maxNums){
+            result.clear();
+            result.push_back(pre->val);
+            maxNums = count;
+        }else if(count == maxNums){
+            result.push_back(pre->val);
+        }
+        
+        return result;
+    }
+};
+```
+
