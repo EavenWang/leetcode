@@ -1883,3 +1883,76 @@ public:
 };
 ```
 
+## 2024.12.6
+
+### [617. 合并二叉树](https://leetcode.cn/problems/merge-two-binary-trees/)
+
+```C++
+class Solution {
+public:
+    TreeNode* mergeTrees(TreeNode* root1, TreeNode* root2) {
+        if(root1 == nullptr){
+            return root2;
+        }else if(root2 == nullptr){
+            return root1;
+        }
+        
+        TreeNode * root = new TreeNode(root1->val + root2->val);
+        
+        root->left = mergeTrees(root1->left,root2->left);
+        root->right = mergeTrees(root1->right,root2->right);
+        
+        return root;
+        
+    }
+};
+```
+
+### [700. 二叉搜索树中的搜索](https://leetcode.cn/problems/search-in-a-binary-search-tree/)
+
+```C++
+class Solution {
+public:
+    TreeNode* searchBST(TreeNode* root, int val) {
+        if(root == nullptr) return nullptr;
+        
+        if(root->val == val) return root;
+        else if(root->val < val) return searchBST(root->right,val);
+        else  return searchBST(root->left,val);
+    }
+};
+```
+
+## 2024.12.7
+
+### [98. 验证二叉搜索树](https://leetcode.cn/problems/validate-binary-search-tree/)
+
+```C++
+class Solution {
+public:
+       
+    bool preOrder(TreeNode * root,long long & val){
+        if(root == nullptr) return true;
+        
+        bool left = preOrder(root->left,val);
+        
+        if(root->val <= val){
+            return false;
+        }else{
+            val = root->val;
+        }
+        
+        bool right = preOrder(root->right,val);
+        
+        return left && right;
+        
+    }
+    
+    bool isValidBST(TreeNode* root) {
+        long long val = LONG_MIN;
+        if(root == nullptr) return true;
+        return preOrder(root,val);
+    }
+};
+```
+
