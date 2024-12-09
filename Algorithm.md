@@ -2040,3 +2040,83 @@ public:
 };
 ```
 
+## 2024.12.9
+
+### [236. 二叉树的最近公共祖先](https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-tree/)
+
+```C++
+class Solution {
+public:
+        
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        
+        if(root == p || root == q || root == nullptr) return root;
+		
+        TreeNode * left =  lowestCommonAncestor(root->left,p,q);
+        TreeNode * right =  lowestCommonAncestor(root->right,p,q);
+        if(left != nullptr && right != nullptr) return root;
+        
+        else if(left == nullptr) return right;
+        
+        else return left;
+             
+    }
+};
+```
+
+### [235. 二叉搜索树的最近公共祖先](https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-search-tree/)
+
+```C++
+class Solution {
+public:
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        if(root == nullptr) return root;
+        
+        if(root->val < p->val && root->val < q->val) {
+            TreeNode * right =  lowestCommonAncestor(root->right,p,q);
+            if(right != nullptr){
+                return right;
+            }
+        }
+        
+        if(root->val > p->val && root->val > q->val){
+            TreeNode * left = lowestCommonAncestor(root->left,p,q);
+            if(left != nullptr){
+                return left;
+            }
+        }
+        return root;
+    }
+};
+```
+
+### [701. 二叉搜索树中的插入操作](https://leetcode.cn/problems/insert-into-a-binary-search-tree/)
+
+```C++
+class Solution {
+public:
+    TreeNode* insertIntoBST(TreeNode* root, int val) {
+        TreeNode * curr = root;
+        
+        while(curr){
+            if(curr->val < val) {
+                if(curr->right)
+                	curr = curr->right;
+                else{
+                    curr->right = new TreeNode(val);
+                    break;
+                } 
+            }else {
+                if(curr->left)
+                	curr = curr->left;
+                else {
+                    curr->left = new TreeNode(val);
+                    break;
+                }
+            }
+        }
+
+        return root;
+    }
+};
+```
