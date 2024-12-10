@@ -2120,3 +2120,120 @@ public:
     }
 };
 ```
+
+## 2024.12.10
+
+### [450. 删除二叉搜索树中的节点](https://leetcode.cn/problems/delete-node-in-a-bst/)
+
+```C++
+class Solution {
+public:
+    TreeNode* deleteNode(TreeNode* root, int key) {
+        if(root == nullptr) return nullptr;
+        
+        if(root->val == key){
+            if(root->left == nullptr && root->right == nullptr){
+                delete root;
+                return nullptr
+            }
+            
+            if(root->left == nullptr){
+                TreeNode * temp = root->right;
+                delete root;
+                return temp;
+            }else if(root->right == nullptr){
+                TreeNode * temp = root->left;
+                delete root;
+                return temp;
+            }
+            
+            TreeNode * curr = root->right;
+            
+            while(curr->left != nullptr){
+                curr = curr->left;
+            }
+            
+            curr->left = root->left;
+            
+            curr = root->right;
+            
+            delete root;
+            
+            return curr;
+        }
+        
+        if(root->val < key) root->right = deleteNode(root->right,key);
+        if(root->val > key) root->left = deleteNode(root->left,key);
+        
+        return root;
+    }
+};
+```
+
+### [669. 修剪二叉搜索树](https://leetcode.cn/problems/trim-a-binary-search-tree/)
+
+```C++
+class Solution {
+public:
+    TreeNode* trimBST(TreeNode* root, int low, int high) {
+        if(root == nullptr) return nullptr;
+        
+        if(root->val < low) {
+            return trimBST(root->right,low,high)
+        }
+        if(root->val > high){
+            return trimBST(root->left,low,high)
+        }
+        
+        root->left = trimBST(root->left,low,high);
+        root->right = trimBST(root->right,low,high);
+        return root;
+            
+    }
+};
+```
+
+### [108. 将有序数组转换为二叉搜索树](https://leetcode.cn/problems/convert-sorted-array-to-binary-search-tree/)
+
+```C++
+class Solution {
+public:
+    
+    TreeNode * helper(vector<int> & nums,int l,int r){
+        if(l > r) return nullptr;
+        int mid = (l + r) / 2;
+        
+        TreeNode * root = new TreeNode(nums[mid]);
+        
+        root->left = helper(nums,l,mid - 1);
+        root->right = helper(nums,mid + 1,r);
+        return root;
+    }
+    
+    TreeNode* sortedArrayToBST(vector<int>& nums) {
+        return helper(nums,0,nums.size() - 1);
+    }
+};
+```
+
+### [538. 把二叉搜索树转换为累加树](https://leetcode.cn/problems/convert-bst-to-greater-tree/)
+
+```C++
+class Solution {
+public:
+    
+    int pre = 0;
+    
+    TreeNode* convertBST(TreeNode* root) {
+        if(root == nullptr) return nullptr;
+    
+        root->right = convertBST(root->right);
+        root->val = root->val + pre;
+        pre = root->val;
+       	root->left = convertBST(root->left);
+        
+        return root;
+    }
+};
+```
+
