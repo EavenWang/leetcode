@@ -2237,3 +2237,185 @@ public:
 };
 ```
 
+## 2024.12.11
+
+### [77. 组合](https://leetcode.cn/problems/combinations/)
+
+```C++
+class Solution {
+public:
+    
+    vector<vector<int>> result;
+    vector<int> path;
+    
+    void helper(int n,int k,int start){
+        if(path.size() == k){
+            result.push_back(path);
+            return;
+        }
+        
+        for(int i = start;i <= n - (k - path.size()) + 1;i++){
+            path.push_back(i);
+            helper(n,k,i + 1);
+            path.pop_back();
+        }
+    }
+    
+    vector<vector<int>> combine(int n, int k) {
+        helper(n,k,1);
+        return result;
+    }
+};
+```
+
+### [216. 组合总和 III](https://leetcode.cn/problems/combination-sum-iii/)
+
+```C++
+class Solution {
+public:
+    vector<vector<int>> result;
+    vector<int> path;
+    
+    void helper(int k,int n,int start){
+		
+        if(n < 0) return;
+        
+        if(path.size() == k){
+            if(n == 0) result.push_back(path);
+            return;
+        }
+        
+        for(int i = start;i <= 9 - (k - path.size()) + 1 && n > 0;i++){
+            path.push_back(i);
+            helper(k,n - i,i + 1);
+            path.pop_back();
+        }
+    }
+    
+    vector<vector<int>> combinationSum3(int k, int n) {
+        helper(k,n,1);
+        return result;
+    }
+};
+```
+
+### [17. 电话号码的字母组合](https://leetcode.cn/problems/letter-combinations-of-a-phone-number/)
+
+```C++
+class Solution {
+public:
+    const string letterMap[10] = {
+    "", // 0
+    "", // 1
+    "abc", // 2
+    "def", // 3
+    "ghi", // 4
+    "jkl", // 5
+    "mno", // 6
+    "pqrs", // 7
+    "tuv", // 8
+    "wxyz", // 9
+    };
+    
+    vector<string> result;
+    string path;
+	
+    void helper(string digits,int start){
+        if(start == digits.size()){
+            result.push_back(path);
+            return;
+        }
+        
+        int number = digits[start] - '0';
+        string letter = letterMap[number];
+        for(int j = 0;j < letter.size();j++){
+            path.push_back(letter[j]);
+            helper(digits,start + 1);
+            path.pop_back();
+        }  
+        
+    }
+    
+    vector<string> letterCombinations(string digits) {
+        if(digits.size() == 0) return {};
+        helper(digits,0);
+        return result;
+    }
+};
+```
+
+### [39. 组合总和](https://leetcode.cn/problems/combination-sum/)
+
+```C++
+class Solution {
+public:
+    vector<vector<int>> result;
+    
+    vector<int> path;
+    
+    void helper(vector<int>& candidates, int target,int start){
+        
+        if(target < 0) return;
+        
+        if(target == 0){
+            result.push_back(path);
+            return;
+        }
+        
+        for(int i = start;i < candidates.size();i++){
+            if(candidates[i] > target) continue;
+            path.push_back(candidates[i]);
+            helper(candidates,target - candidates[i],i);
+            path.pop_back();
+        }
+    }
+    
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        helper(candidates,target,0);
+        return result;
+    }
+};
+```
+
+### [40. 组合总和 II](https://leetcode.cn/problems/combination-sum-ii/)
+
+```C++
+class Solution {
+public:
+    
+    vector<vector<int>> result;
+    vector<int> path;
+    
+    void helper(vector<int> & candidates,int target,int start){
+        if(target == 0){
+            result.push_back(path);
+            return;
+        }
+        if(target < 0) return;
+        
+        for(int i = start;i < candidates.size();i++){
+            if(i > start && candidates[i] == candidates[i - 1]){
+                continue;
+            }
+            
+            if(candidates[i] > target) break;
+            
+            path.push_back(candidates[i]);
+            
+            helper(candidates,target - candidates[i],i + 1);
+            
+            path.pop_back();
+        }
+    }
+    
+    
+    vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
+        sort(candidates.begin(),candidates.end());
+        
+        helper(candidates,target,0);
+        
+        return result;
+    }
+};
+```
+
