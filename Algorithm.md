@@ -2419,3 +2419,81 @@ public:
 };
 ```
 
+## 2024.12.12
+
+### [131. 分割回文串](https://leetcode.cn/problems/palindrome-partitioning/)
+
+```C++
+class Solution {
+public:
+    
+    bool isPalin(const string & s,int l,int r){
+        while(l < r){
+            if(s[l] != s[r]) return false;
+            l++;
+            r--;
+        }
+        return true;
+    }
+    
+    vector<vector<string>> result;
+    vector<string> path;
+    
+    void helper(string& s,int start){
+        if(start == s.size()){
+            result.push_back(path);
+            return;
+        }
+        
+        for(int i = start;i < s.size();i++){
+            string sub = s.substr(start,i - start + 1);
+            
+            if(isPalin(sub,0,sub.size() - 1)){
+                path.push_back(sub);
+            }else{
+                continue;
+            }
+            helper(s,i + 1);
+            path.pop_back();
+        }
+    }
+    
+    vector<vector<string>> partition(string s) {
+        helper(s,0);
+        return result;
+    }
+};
+```
+
+### [93. 复原 IP 地址](https://leetcode.cn/problems/restore-ip-addresses/)
+
+```C++
+class Solution {
+public:
+    
+    vector<string> result;
+    vector<string> path;
+    
+    void helper(string & s,int start){
+        if(path.size() == 4){
+            if(start == s.size()){
+                string t = "";
+                for(int i = 0;i < path.size();i++){
+                    if(i == 0) t = path[i];
+                    else t = t + "." + path[i];
+                }
+            }
+            return;
+        }
+        
+        for(int i = start;i < s.size();i++){
+            
+        }
+    }
+    
+    vector<string> restoreIpAddresses(string s) {
+        
+    }
+};
+```
+
