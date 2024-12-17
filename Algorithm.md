@@ -2482,18 +2482,150 @@ public:
                     if(i == 0) t = path[i];
                     else t = t + "." + path[i];
                 }
+                result.push_back(t);
             }
             return;
         }
         
         for(int i = start;i < s.size();i++){
-            
+            string ipStr = s.substr(start,i - start + 1);
+            if(ipStr.size() > 1 && ipStr[0] - '0' == 0) continue;
+            if(htoi(ipStr.c_str()) < 0 || htoi(ipStr.c_str()) > 255) continue;
+            path.push_back(ipStr);
+            helper(s,i + 1);
+            path.pop_back();
         }
     }
     
     vector<string> restoreIpAddresses(string s) {
-        
+        helper(s,0);
+        return result;
     }
 };
+```
+
+## 12.17
+
+### [78. 子集](https://leetcode.cn/problems/subsets/)
+
+```C++
+class Solution {
+public:
+    vector<vector<int>> result;
+    vector<int> path;
+    
+    void helper(vector<int> & nums,int start){
+        result.push_back(path);
+        
+        for(int i = start;i < nums.size();i++){
+            path.push_back(nums[i]);
+            helper(nums,i + 1);
+            path.pop_back();
+        }
+    }
+    
+    vector<vector<int>> subsets(vector<int>& nums) {
+        helper(nums,0);
+        return result;
+    }
+};
+```
+
+### [90. 子集 II](https://leetcode.cn/problems/subsets-ii/)
+
+```C++
+class Solution {
+public:
+    
+    vector<vector<int>> result;
+    vector<int> path;
+    
+    void helper(vector<int> & nums,int start){
+    	result.push_back(path);
+        
+        for(int i = start;i < nums.size();i++){
+            if(i > start && nums[i] == nums[i - 1]) continue;
+            path.push_back(nums[i]);
+            helper(nums,i + 1);
+            path.pop_back();
+        }
+    }
+    
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+        helper(nums,0);
+        return result;
+    }
+};
+```
+
+### [491. 非递减子序列](https://leetcode.cn/problems/non-decreasing-subsequences/)
+
+```C++
+class Solution {
+public:
+    vector<vector<int>> result;
+    vector<int> path;
+    
+    void helper(vector<int> & nums,int start){
+        if(path.size() >= 2){
+             result.push_back(path);
+        }
+        
+        unordered_set<int> uset;
+        for(int i = start;i < nums.size();i++){
+            if(uset.find(nums[i]) != uset.end()) continue;
+            if(path.size() > 0  && nums[i] < path[path.size() - 1]) continue;
+            uset.insert(nums[i]);
+            path.push_back(nums[i]);
+            helper(nums,i + 1);
+            path.pop_back();
+        }
+    }
+    vector<vector<int>> findSubsequences(vector<int>& nums) {
+        helper(nums,0);
+        return result;
+    }
+};
+```
+
+### [46. 全排列](https://leetcode.cn/problems/permutations/)
+
+```C++
+class Solution {
+public:
+    
+    bool used[21] = {false};
+    vector<vector<int>> result;
+    vector<int> path;
+    
+    void helper(vector<int> & nums){
+        if(path.size() == nums.size()){
+            result.push_back(path);
+            return;
+        }
+        
+        for(int i = 0;i < nums.size();i++){
+            if(used[nums[i] + 10]) continue;
+            
+            used[nums[i] + 10] = true;
+            path.push_back(nums[i]);
+            helper(nums);
+            path.pop_back();
+            used[nums[i] + 10] = false;
+        }
+    }
+    
+    vector<vector<int>> permute(vector<int>& nums) {
+        helper(nums);
+        return result;
+    }
+};
+```
+
+### [47. 全排列 II](https://leetcode.cn/problems/permutations-ii/)
+
+```C++
+
 ```
 
