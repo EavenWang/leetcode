@@ -2504,7 +2504,7 @@ public:
 };
 ```
 
-## 12.17
+## 2024.12.17
 
 ### [78. 子集](https://leetcode.cn/problems/subsets/)
 
@@ -2623,9 +2623,456 @@ public:
 };
 ```
 
+## 2024.12.19
+
 ### [47. 全排列 II](https://leetcode.cn/problems/permutations-ii/)
 
 ```C++
+class Solution {
+public:
+    vector<vector<int>> result;
+    vector<int> path;
+    bool used[21] = {false};
+    
+    void helper(vector<int> & nums){
+        if(path.size() == nums.size()){
+            result.push_back(path);
+            return;
+        }
+        
+        for(int i = 0;i < nums.size();i++){
+            if(used[i]) continue;
+            if(i > 0 && nums[i] == nums[i - 1] && used[i - 1] == false) continue;
+            path.push_back(nums[i]);
+            used[i] = true;
+            helper(nums);
+            used[i] = false;
+            path.pop_back();
+        }
+    }
+    
+    vector<vector<int>> permuteUnique(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+        helper(nums);
+        return result;
+    }
+};
+```
 
+## 2024.12.24
+
+### [332. 重新安排行程](https://leetcode.cn/problems/reconstruct-itinerary/)
+
+```C++
+class Solution {
+public:
+    unordered_map<string,map<string,int>> planes;
+    vector<string> result;
+    
+    bool helper(int nums){
+        if(result.size() == nums + 1){
+            return true;
+        }
+        
+        for(pair<const string,int> & target : targets[result[result.size() - 1]]){
+            if(target.second > 0){
+                result.push_back(target.first);
+                target.second--;
+                if(helper(nums)) return true;
+                result.pop_back();
+                target.second++;
+            }
+        }
+        return false;
+    }
+    
+    vector<string> findItinerary(vector<vector<string>>& tickets) {
+        for(const vector<string> & t : tickets){
+            planes[t[0]][t[1]]++;
+        }
+        result.push_back("JFK");
+        helper(tickets.size());
+        return result; 
+    }
+};
+```
+
+### [51. N 皇后](https://leetcode.cn/problems/n-queens/)
+
+```C++
+class Solution {
+public:
+    bool dg[20],udg[20],col[20];
+    vector<vector<string>> result;
+    void helper(int row,int n,vector<string> & path){
+        if(row == n){ 
+            result.push_back(path);
+            return;
+        }
+        
+        for(int i = 0;i < n;i++){
+            if(!col[i] && !dg[i + row] && !udg[n + i - row]){
+                path[row][i] = 'Q';
+                col[i] = dg[i + row] = udg[n + i - row] = true;
+                helper(row + 1,n,path);
+                path[row][i] = '.';
+                col[i] = dg[i + row] = udg[n + i - row] = false;
+            }
+        }
+    }
+    vector<vector<string>> solveNQueens(int n) {
+        vector<string> path(n,string(n,'.'));
+        helper(0,n,path);
+        return result;
+    }
+};
+```
+
+## 2024.12.25
+
+### [37. 解数独](https://leetcode.cn/problems/sudoku-solver/)
+
+```C++
+class Solution {
+public:
+    bool row[10][10];
+    bool col[10][10];
+    bool grid[3][3][10];
+    
+    bool helper(vector<vector<char>>& board){
+        for(int i = 0;i < board.size();i++){
+            for(int j = 0;j < board[i].size();j++){
+                if(board[i][j] == '.'){
+                    for(char k = '1';k < '9';k++){
+                        if(row[i][k - '0'] || col[j][k - '0'] || grid[i / 3][j / 3][k - '0']) continue;
+                        board[i][j] = k;
+                        row[i][board[i][j] - '0'] = true;
+                    	col[j][board[i][j] - '0'] = true;
+                    	grid[i / 3][j / 3][board[i][j] - '0'] = true;
+                        if(helper(board)) return true;
+                        board[i][j] = '.';
+                        row[i][board[i][j] - '0'] = false;
+                    	col[j][board[i][j] - '0'] = false;
+                    	grid[i / 3][j / 3][board[i][j] - '0'] = false;   
+                    }
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    
+    void solveSudoku(vector<vector<char>>& board) {
+        for(int i = 0;i < board.size();i++){
+            for(int j = 0;j < board[i].size();j++){
+                if(board[i][j] != '.'){
+                    row[i][board[i][j] - '0'] = true;
+                    col[j][board[i][j] - '0'] = true;
+                    grid[i / 3][j / 3][board[i][j] - '0'] = true;
+                }
+            }
+        }
+        helper(board);
+    }
+};
+```
+
+### [455. 分发饼干](https://leetcode.cn/problems/assign-cookies/)
+
+```C++
+class Solution {
+public:
+    int findContentChildren(vector<int>& g, vector<int>& s) {
+        sort(g.begin(),g.end());
+        sort(s.begin(),s.end());
+        
+        int index = s.size() - 1;
+        
+        int result = 0;
+        
+        for(int i = g.size() - 1;i >= 0;i--){
+            if(index >= 0 && s[index] >= g[i]){
+                result++;
+                index--;
+            }
+        }
+        return result;
+    }
+};
+
+class Solution {
+public:
+    int findContentChildren(vector<int>& g, vector<int>& s) {
+        sort(g.begin(),g.end());
+        sort(s.begin(),s.end());
+        
+        int index = 0;
+        
+        for(int i = 0;i < s.size();i++){
+            if(index < g.size() && g[index] <= s[i]){
+                index++;
+            }
+        }
+        return result;
+    }
+};
+
+```
+
+### [376. 摆动序列](https://leetcode.cn/problems/wiggle-subsequence/)
+
+```C++
+class Solution {
+public:
+    int wiggleMaxLength(vector<int>& nums) {
+       	int len = nums.size();
+        if(len == 0) return 0;
+        if(len < 2) return 1;
+        
+        int sum = 1;
+        int dircetion = 0;
+        
+        for(int i = 1;i < len;i++){
+            if(nums[i] == nums[i - 1]) continue;
+            
+            if(nums[i] > nums[i - 1]){
+            	if(direction != 0 && direction == 1) continue;
+                direction = 1;
+            }else{
+                if(direction != 0 && direction == -1) continue;
+                direction = -1;
+            }
+            sum++;
+        }
+        return sum;
+    }
+};
+```
+
+## 2024.12.26
+
+### [53. 最大子数组和](https://leetcode.cn/problems/maximum-subarray/)
+
+```C++
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        int result = INT32_MIN;
+        int count = 0;
+        
+        for(int i = 0;i < nums.size();i++){
+            count += nums[i];
+            if(count > result){
+                result = count;
+            }
+            
+            if(count <= 0){
+                count = 0;
+            }
+        }
+        return result;
+    }
+};
+```
+
+### [122. 买卖股票的最佳时机 II](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-ii/)
+
+```C++
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int result = 0;
+        
+        for(int i = 1;i < prices.size();i++){
+            if(prices[i] > prices[i - 1]){
+                result += (prices[i] - prices[i - 1]);
+            }
+        }
+        return result;
+    }
+};
+```
+
+### [55. 跳跃游戏](https://leetcode.cn/problems/jump-game/)
+
+```C++
+class Solution {
+public:
+    bool canJump(vector<int>& nums) {
+       if(nums.size() <= 1) return true;
+        int cover = 0;
+        for(int i = 0;i <= cover;i++){
+            cover = max(i + nums[i],cover);
+            if(cover >= nums.size() - 1) return true;
+        }
+        return false;
+    }
+};
+```
+
+### [45. 跳跃游戏 II](https://leetcode.cn/problems/jump-game-ii/)
+
+```C++
+class Solution {
+public:
+    int jump(vector<int>& nums) {
+        int next = 0;
+        int cur = 0;
+        int steps = 0;
+        if(nums.size() <= 1) return 0;
+        
+        for(int i = 0;i < nums.size();i++){
+            next = max(i + nums[i],next);
+            if(i == curr){
+                steps++;
+                curr = next;
+                if(curr >= nums.size() - 1) return steps;
+            }
+        }
+        return steps;
+    }
+};
+```
+
+### [1005. K 次取反后最大化的数组和](https://leetcode.cn/problems/maximize-sum-of-array-after-k-negations/)
+
+```C++
+class Solution {
+public:
+    
+    static bool cmp(int a,int b){
+        return abs(a) > abs(b);
+    }
+    
+    int largestSumAfterKNegations(vector<int>& nums, int k) {
+        sort(nums.begin(),nums.end(),cmp);
+        
+        for(int i = 0;i < nums.size();i++){
+            if(nums[i] < 0 && k > 0){
+                k--;
+                nums[i] = -nums[i];
+            }
+        }
+        while(k > 0){
+            k--;
+            nums[nums.size() - 1] *= -1;
+        }
+        int result = 0;
+        for(int & e:nums)result += e;
+        return result;
+    }
+};
+```
+
+## 2024.12.27
+
+### [134. 加油站](https://leetcode.cn/problems/gas-station/)
+
+```C++
+class Solution {
+public:
+    int canCompleteCircuit(vector<int>& gas, vector<int>& cost) {
+        int s = 0;
+        int curSum = 0;
+        int totalSum = 0;
+        
+        for(int i = 0;i < gas.size();i++){
+            curSum += gas[i] - cost[i];
+            total += gas[i] - cost[i];
+            if(curSum < 0){
+                start = i + 1;
+                curSum = 0;
+            }
+        }
+        if(totalSum < 0) return -1;
+        return start;
+    }
+};
+
+class Solution {
+public:
+    int canCompleteCircuit(vector<int>& gas, vector<int>& cost) {
+        int min = INT32_MAX;
+        int curSum = 0;
+        
+        for(int i = 0;i < gas.size();i++){
+            curSum += gas[i] - cost[i];
+            if(curSum < min){
+                min = curSum;
+            }
+        }
+        
+        if(curSum < 0) return -1;
+        
+        if(min >= 0) return 0;
+        
+        for(int i = gas.size() - 1;i >= 0;i++){
+            min += (gas[i] - cost[i]);
+            if(min >= 0) return i;
+        }
+        return -1;
+    }
+};
+```
+
+### [135. 分发糖果](https://leetcode.cn/problems/candy/)
+
+```C++
+class Solution {
+public:
+    int candy(vector<int>& ratings) {
+        int result = ratings.size();
+        vector<int> ratingsHelper(ratings.size(),1);
+        
+       for(int i = 0;i < ratings.size();i++){
+            if(i > 0 && ratings[i] > ratings[i - 1]) {
+                result += (ratingsHelper[i-1] - ratingsHelper[i] + 1);
+                ratingsHelper[i] = ratingsHelper[i - 1] + 1;
+            }
+        }
+        
+        for(int i = ratings.size() - 1;i >= 0;i--){
+            if(i < ratings.size() - 1 && ratings[i] > ratings[i + 1]){
+                if(ratingsHelper[i] <= ratingsHelper[i + 1]){
+                    result += (ratingsHelper[i + 1] - ratingsHelper[i] + 1);
+                    ratingsHelper[i] = ratingsHelper[i + 1] + 1;
+                }
+            }
+        }
+        return result;
+    }
+};
+```
+
+### [860. 柠檬水找零](https://leetcode.cn/problems/lemonade-change/)
+
+```C++
+class Solution {
+public:
+    bool lemonadeChange(vector<int>& bills) {
+        int numsf = 0;
+        int numst = 0;
+        
+        for(int i = 0;i < bills.size();i++){
+            if(bills[i] == 5) numsf++;
+            
+            if(bills[i] == 10){
+                numsf--;
+                numst++;
+            }
+            
+            if(bills[i] == 20){
+                if(numst > 0){
+                    numst--;
+                    numsf--;
+                }else{
+                    numsf -= 3;
+                }
+            }
+            if(numsf < 0) return false;
+        }
+        return true;
+    }
+};
 ```
 
