@@ -1,6 +1,6 @@
 # Algorithm
 
-## 2024.11.6
+## 2024
 
 ### [206. 反转链表](https://leetcode.cn/problems/reverse-linked-list/)
 
@@ -157,8 +157,6 @@ public:
 };
 ```
 
-## 2024.11.7
-
 ### [242. 有效的字母异位词](https://leetcode.cn/problems/valid-anagram/)
 
 ```C++
@@ -237,8 +235,6 @@ public:
     }
 };
 ```
-
-## 2024.11.8
 
 ### [438. 找到字符串中所有字母异位词](https://leetcode.cn/problems/find-all-anagrams-in-a-string/)
 
@@ -364,8 +360,6 @@ public:
 };
 ```
 
-## 2024.11.12
-
 ### [454. 四数相加 II](https://leetcode.cn/problems/4sum-ii/)
 
 ```C++
@@ -430,8 +424,6 @@ public:
     }
 };
 ```
-
-## 2024.11.14
 
 ### [18. 四数之和](https://leetcode.cn/problems/4sum/)
 
@@ -620,13 +612,9 @@ public:
 };
 ```
 
-## 2024.11.15
-
 ### [28. 找出字符串中第一个匹配项的下标(KMP)](https://leetcode.cn/problems/find-the-index-of-the-first-occurrence-in-a-string/)
 
 
-
-## 2024.11.18
 
 ### [27. 移除元素](https://leetcode.cn/problems/remove-element/)
 
@@ -861,8 +849,6 @@ public:
 };
 ```
 
-## 2024.11.19
-
 ### [1047. 删除字符串中的所有相邻重复项](https://leetcode.cn/problems/remove-all-adjacent-duplicates-in-string/)
 
 ```C++
@@ -1001,8 +987,6 @@ public:
 };
 ```
 
-## 2024.11.20
-
 ### [144. 二叉树的前序遍历](https://leetcode.cn/problems/binary-tree-preorder-traversal/)
 
 ```C++
@@ -1085,8 +1069,6 @@ public:
     }
 };
 ```
-
-## 2024.11.21
 
 ### [102. 二叉树的层序遍历](https://leetcode.cn/problems/binary-tree-level-order-traversal/)
 
@@ -1219,8 +1201,6 @@ public:
     }
 };
 ```
-
-## 2024.11.22
 
 ### [226. 翻转二叉树](https://leetcode.cn/problems/invert-binary-tree/)
 
@@ -1508,8 +1488,6 @@ public:
 };
 ```
 
-## 2024.11.23
-
 ### [257. 二叉树的所有路径](https://leetcode.cn/problems/binary-tree-paths/)
 
 ```C++
@@ -1675,8 +1653,6 @@ public:
 };
 ```
 
-## 2024.11.25
-
 ### [113. 路径总和 II](https://leetcode.cn/problems/path-sum-ii/)
 
 ```C++
@@ -1757,8 +1733,6 @@ public:
 
 ```
 
-## 2024.11.29
-
 ### [106. 从中序与后序遍历序列构造二叉树](https://leetcode.cn/problems/construct-binary-tree-from-inorder-and-postorder-traversal/)
 
 ```C++
@@ -1795,8 +1769,6 @@ public:
      
 };
 ```
-
-## 2024.12.5
 
 ### [70. 爬楼梯](https://leetcode.cn/problems/climbing-stairs/)
 
@@ -1883,8 +1855,6 @@ public:
 };
 ```
 
-## 2024.12.6
-
 ### [617. 合并二叉树](https://leetcode.cn/problems/merge-two-binary-trees/)
 
 ```C++
@@ -1922,8 +1892,6 @@ public:
     }
 };
 ```
-
-## 2024.12.7
 
 ### [98. 验证二叉搜索树](https://leetcode.cn/problems/validate-binary-search-tree/)
 
@@ -2040,8 +2008,6 @@ public:
 };
 ```
 
-## 2024.12.9
-
 ### [236. 二叉树的最近公共祖先](https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-tree/)
 
 ```C++
@@ -2120,8 +2086,6 @@ public:
     }
 };
 ```
-
-## 2024.12.10
 
 ### [450. 删除二叉搜索树中的节点](https://leetcode.cn/problems/delete-node-in-a-bst/)
 
@@ -2236,8 +2200,6 @@ public:
     }
 };
 ```
-
-## 2024.12.11
 
 ### [77. 组合](https://leetcode.cn/problems/combinations/)
 
@@ -2419,8 +2381,6 @@ public:
 };
 ```
 
-## 2024.12.12
-
 ### [131. 分割回文串](https://leetcode.cn/problems/palindrome-partitioning/)
 
 ```C++
@@ -2503,8 +2463,6 @@ public:
     }
 };
 ```
-
-## 2024.12.17
 
 ### [78. 子集](https://leetcode.cn/problems/subsets/)
 
@@ -2623,8 +2581,6 @@ public:
 };
 ```
 
-## 2024.12.19
-
 ### [47. 全排列 II](https://leetcode.cn/problems/permutations-ii/)
 
 ```C++
@@ -2658,8 +2614,6 @@ public:
     }
 };
 ```
-
-## 2024.12.24
 
 ### [332. 重新安排行程](https://leetcode.cn/problems/reconstruct-itinerary/)
 
@@ -2727,8 +2681,6 @@ public:
     }
 };
 ```
-
-## 2024.12.25
 
 ### [37. 解数独](https://leetcode.cn/problems/sudoku-solver/)
 
@@ -2849,8 +2801,6 @@ public:
 };
 ```
 
-## 2024.12.26
-
 ### [53. 最大子数组和](https://leetcode.cn/problems/maximum-subarray/)
 
 ```C++
@@ -2964,8 +2914,6 @@ public:
 };
 ```
 
-## 2024.12.27
-
 ### [134. 加油站](https://leetcode.cn/problems/gas-station/)
 
 ```C++
@@ -3072,6 +3020,948 @@ public:
             if(numsf < 0) return false;
         }
         return true;
+    }
+};
+```
+
+### [406. 根据身高重建队列](https://leetcode.cn/problems/queue-reconstruction-by-height/)
+
+```C++
+class Solution {
+public:
+    
+    static bool cmp(const vector<int> & lhs,const vector<int> & rhs){
+        if(lhs[0] == rhs[0]) return lhs[1] < rhs[1];
+        return lhs[0] > rhs[0];
+    }
+    
+    vector<vector<int>> reconstructQueue(vector<vector<int>>& people) {
+        sort(people.begin(),people.end(),cmp);
+        
+        list<vector<int>> q;
+        
+        for(int i = 0;i < people.size();i++){
+            int pos = people[i][1];
+            list<vector<int>>::iterator it = q.begin();
+            while(q > 0){
+                it++;
+                q--;
+            }
+            q.insert(it,people[i]);
+        }
+        return vector<vector<int>>(q.begin(),q.end());
+    }
+};
+```
+
+### [452. 用最少数量的箭引爆气球](https://leetcode.cn/problems/minimum-number-of-arrows-to-burst-balloons/)
+
+```C++
+class Solution {
+public:
+    
+    static bool cmp(vector<int> & lhs,vector<int> & rhs){
+        if(lhs[0] == rhs[0]) return lhs[1] < rhs[1];
+        return lhs[0] < rhs[0];
+    }
+    
+    int findMinArrowShots(vector<vector<int>>& points) {
+        sort(points.begin(),points.end(),cmp);
+        
+        int result = 0;
+        int end;
+        int start;
+        for(int i = 0;i < points.size();i++){
+            if(i == 0 || points[i][0] > end){
+                end = points[i][1];
+                start = points[i][0];
+                result++;
+            }else{
+                start = points[i][0];
+                end = min(end,points[i][1]);
+            }
+        }
+        return result;
+    }
+};
+```
+
+###  [435. 无重叠区间](https://leetcode.cn/problems/non-overlapping-intervals/)
+
+```C++
+class Solution {
+public:
+    
+    static bool cmp(vector<int> & lhs,vector<int> & rhs){
+        if(lhs[0] == rhs[0]) return lhs[1] < rhs[1];
+        return lhs[0] < rhs[0];
+    }
+    
+    int eraseOverlapIntervals(vector<vector<int>>& intervals) {
+        
+        sort(intervals.begin(),intervals.end(),cmp);
+        int result = 0;
+        int end;
+        
+        for(int i = 0;i < intervals.size();i++){
+            if(i == 0 || end <= intervals[i][0]){
+                end = intervals[i][1];
+            }else{
+                result++;
+                end = min(end,intervals[i][1]);
+            }
+        }
+        
+        return result;
+    }
+};
+```
+
+### [763. 划分字母区间](https://leetcode.cn/problems/partition-labels/)
+
+```C++
+class Solution {
+public:
+    vector<int> partitionLabels(string s) {
+        int uhash[26] = {0};
+        
+        for(int i = 0;i < s.size();i++){
+            uhash[s[i] - 'a'] = i;
+        }
+        
+        int l = 0;
+        int r = 0;
+        vector<int> result;
+        
+        for(int i = 0;i < s.size();i++){
+            r = max(r,uhash[s[i] - 'a']);
+            
+            if(i == r){
+                result.push_back(r - l + 1);
+                r = i + 1;
+                l = i + 1;
+            }
+        }
+        return result;
+    }
+};
+```
+
+### [56. 合并区间](https://leetcode.cn/problems/merge-intervals/)
+
+```C++
+class Solution {
+public:
+    static bool cmp(vector<int> & lhs,vector<int> & rhs){
+        if(lhs[0] == rhs[0]) return lhs[1] < rhs[1];
+        return lhs[0] < rhs[0];
+    }
+    
+    vector<vector<int>> merge(vector<vector<int>>& intervals) {
+        sort(intervals.begin(),intervals.end(),cmp);
+        
+        int start = intervals[0][0];
+        int end = intervals[0][1];
+        
+        if(intervals.size() == 1) return vector({start,end});
+        
+        vector<vector<int>> result;
+        for(int i = 1;i < intervals.size();i++){
+            if(intervals[i][0] > end){
+                result.push_back({start,end});
+                start = intervals[i][0];
+                end = intervals[i][1];
+            }else{
+                end = max(end,intervals[i][1]);
+            }
+        }
+        result.push_back({start,end});
+        return result;
+    }
+};
+```
+
+### [738. 单调递增的数字](https://leetcode.cn/problems/monotone-increasing-digits/)
+
+```C++
+class Solution {
+public:
+    int monotoneIncreasingDigits(int n) {
+        string num = to_string(n);
+        
+        int flag = num.size();
+        
+        for(int i = flag - 1;i > 0;i--){
+            if(num[i - 1] > num[i]){
+                num[i - 1]--;
+                flag = i;
+            }
+        }
+        
+        for(int i = flag;i < num.size();i++){
+            num[i] = '9';
+        }
+        return stoi(num);
+    }
+};
+```
+
+### [968. 监控二叉树](https://leetcode.cn/problems/binary-tree-cameras/)
+
+```C++
+class Solution {
+public:
+    
+    int result = 0;
+    
+    int helper(TreeNode * root){
+        if(root == nullptr) return 2;
+        
+        int left = helper(root->left);
+        int right = helper(root->right);
+        
+        if(left == 2 && right == 2) return 0;
+        else if(left == 0 || right == 0){
+            result++;
+            return 1;
+        }else return 2;
+        
+    }
+    
+    int minCameraCover(TreeNode* root) {
+        if(helper(root) == 0){
+            result++;
+        }
+        return result;
+    }
+};
+```
+
+### [509. 斐波那契数](https://leetcode.cn/problems/fibonacci-number/)
+
+```C++
+class Solution {
+public:
+    int fib(int n) {
+        if(n == 0) return 0;
+        if(n == 1) return 1;
+        
+        int a = 0,b = 1;
+        
+        for(int i = 2;i <= n;i++){
+            int tmp = a + b;
+            a = b;
+			b = tmp;
+        }
+        return b;
+    }
+};
+```
+
+### [70. 爬楼梯](https://leetcode.cn/problems/climbing-stairs/)
+
+```C++
+class Solution {
+public:
+    int climbStairs(int n) {
+        if(n == 1 || n == 2) return n;
+        
+        int a = 1;
+        int b = 2;
+        
+        for(int i = 2;i <= n;i++){
+            int tmp = a + b;
+            a = b;
+            b = tmp;
+        }
+        return b;
+    }
+};
+```
+
+### [746. 使用最小花费爬楼梯](https://leetcode.cn/problems/min-cost-climbing-stairs/)
+
+```C++
+class Solution {
+public:
+    int minCostClimbingStairs(vector<int>& cost) {
+        if(cost.size() == 1 || cost.size() == 0) return 0;
+        
+        
+        int a = cost[0];
+        int b = cost[1];
+        
+        for(int i = 2;i < cost.size();i++){
+            int tmp = min(a,b) + cost[i];
+            a = b;
+            b = tmp;
+        }
+        return min(a,b);
+    }
+};
+```
+
+### [62. 不同路径](https://leetcode.cn/problems/unique-paths/)
+
+```C++
+class Solution {
+public:
+    int uniquePaths(int m, int n) {
+        if(m == 1 || n == 1) return 1;
+        
+        int dp[m][n] = {};
+        
+        for(int i = 0;i < m;i++){
+            dp[i][0] = 1;
+        }
+        
+        for(int j = 0;j < n;j++){
+            dp[0][j] = 1;
+        }
+        
+        for(int i = 1;i < m;i++){
+            for(int j = 1;j < n;j++){
+                dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+            }
+        }
+        return dp[m - 1][n - 1];
+    }
+};
+
+class Solution {
+public:
+    int uniquePaths(int m, int n) {
+        if(m == 1 || n == 1) return 1;
+        int dp[n] = {0};
+        
+        for(int i = 0;i < n;i++) dp[i] = 1;
+        
+        for(int i = 1;i < m;i++){
+            for(int j = 1;j < n;j++){
+                dp[j] = dp[j] + dp[j - 1];
+            }
+        }
+        return dp[n - 1];
+    }
+};
+
+```
+
+### [63. 不同路径 II](https://leetcode.cn/problems/unique-paths-ii/)
+
+```C++
+class Solution {
+public:
+    int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid) {
+        int m = obstacleGrid.size();
+        int n = obstacleGrid[0].size();
+        
+        vector<int> dp(n,0);
+        for(int i = 0;i < n;i++){
+            if(obstacleGrid[0][i] == 0) dp[i] = 1;
+            else break;
+        }
+        
+        for(int i = 1;i < m;i++){
+            for(int j = 1;j < n;j++){
+                if(obstacleGrid[i][j] == 0)
+                	dp[j] = dp[j] + dp[j - 1];
+                else dp[j] = 0;
+            }
+        }
+        return dp[j - 1];
+    }
+};
+```
+
+## 2025.1
+
+### [343. 整数拆分](https://leetcode.cn/problems/integer-break/)
+
+```C++
+class Solution {
+public:
+    int integerBreak(int n) {
+        vector<int> dp(n + 1,0);
+        
+        dp[2] = 1;
+        dp[1] = 1;
+        for(int i = 3;i <= n;i++){
+            for(int j = 1;j <= i / 2;j++){
+                dp[i] = max(dp[i],max((i - j) * j,dp[i - j] * j));
+            }
+        }
+        return dp[n];
+    }
+};
+```
+
+### [96. 不同的二叉搜索树](https://leetcode.cn/problems/unique-binary-search-trees/)
+
+```C++
+class Solution {
+public:
+    int numTrees(int n) {
+        vector<int> dp(n + 1,0);
+        
+        if(n == 1) return 1;
+        dp[0] = 1;
+        dp[1] = 1;
+        
+        for(int i = 2;i <= n;i++){
+            for(int j = 1;j <= i;j++){
+                dp[i] += (dp[j - 1] * dp[i - j]);
+            }
+        }
+        return dp[n];
+    }
+};
+```
+
+### [416. 分割等和子集](https://leetcode.cn/problems/partition-equal-subset-sum/)
+
+```C++
+class Solution {
+public:
+    bool canPartition(vector<int>& nums) {
+		int sum = 0;
+        for(int i = 0;i < nums.size();i++){
+            sum += nums[i];
+        }
+        
+        if(sum % 2 == 1) return false;
+        
+        int target = sum / 2;
+        
+        vector<int> dp(target + 1,0);
+        
+        for(int i = 0;i < nums.size();i++){
+            for(int j = target;j >= nums[i];j--){
+                dp[j] = max(dp[j],dp[j - nums[i]] + nums[i]);
+            }
+        }
+        return dp[target] == target;
+    }
+};
+```
+
+### [1049. 最后一块石头的重量 II](https://leetcode.cn/problems/last-stone-weight-ii/)
+
+```C++
+class Solution {
+public:
+    int lastStoneWeightII(vector<int>& stones) {
+        int sum = 0;
+        
+        for(int i = 0;i < stones.size();i++) sum += stones[i];
+        
+        int target = sum / 2;
+        
+        vector<int> dp(target + 1,0);
+        
+        for(int i = 0;i < stones.size();i++){
+            for(int j = target;j >= stones[i];j--){
+                dp[j] = max(dp[j],dp[j - stones[i]] + stones[i]);
+            }
+        }
+        
+        return sum - dp[target] - dp[target];
+    }
+};
+```
+
+### [494. 目标和](https://leetcode.cn/problems/target-sum/)
+
+```C++
+class Solution {
+public:
+    int findTargetSumWays(vector<int>& nums, int target) {
+        
+        int sum = 0;
+        for(int i = 0;i < nums.size();i++){
+            sum += nums[i];
+        }
+        
+        if(abs(sum) < abs(target)) return 0;
+        
+        if((sum + target) % 2 == 1) return 0;
+        
+        int result = (sum + target) / 2;
+        
+        vector<vector<int>> dp(nums.size(),vector<int>(result + 1,0));
+        
+        if(nums[0] <= result) dp[0][nums[0]] = 1;
+        
+        dp[0][0] = 1;
+        
+        int numsZero = 0;
+        
+        for(int i = 0;i < nums.size();i++){
+            if(nums[i] == 0) numsZero++;
+            dp[i][0] = (int)pow(2.0,numsZero);
+        }
+        
+        
+        for(int i = 1;i < nums.size();i++){
+            for(int j = 0;j <= result;j++){
+                if(nums[i] > j) dp[i][j] = dp[i - 1][j];
+                else dp[i][j] = dp[i - 1][j] + dp[i - 1][j - nums[i]];
+            }
+        }
+        
+        return dp[nums.size() - 1][result];
+    }
+};
+
+
+class Solution {
+public:
+    int findTargetSumWays(vector<int>& nums, int target) {
+        
+        int sum = 0;
+        for(int i = 0;i < nums.size();i++){
+            sum += nums[i];
+        }
+        
+        if(abs(sum) < abs(target)) return 0;
+        
+        if((sum + target) % 2 == 1) return 0;
+        
+        int result = (sum + target) / 2;
+        
+        vector<int> dp(result + 1);
+        
+        dp[0] = 1;
+        
+        for(int i = 0; < nums.size();i++){
+            for(int j = result;j >= nums[i];j--){
+                dp[j] = dp[j] + dp[j - nums[i]];
+            }
+        }
+        
+        return dp[result];
+    }
+};
+```
+
+### [474. 一和零](https://leetcode.cn/problems/ones-and-zeroes/)
+
+```C++
+class Solution {
+public:
+    int findMaxForm(vector<string>& strs, int m, int n) {
+        vector<int> numsZero(strs.size(),0);
+        vector<int> numsOne(strs.size(),0);
+        
+        for(int i = 0;i < strs.size();i++){
+            for(const char & c:strs[i]){
+            	if(c == '0') numsZero[i]++;
+                if(c == '1') numsOne[i]++;
+        	}
+        }
+        
+        vector<vector<int>> dp(m + 1,vector<int>(n + 1,0));
+        
+        if(numsZero[0] <= m && numsOne[0] <= n){
+            for(int j = numsZero[0];j <= m;j++){
+                for(int k = numsOne[0];k <= n;k++){
+                    dp[j][k] = 1;
+                }
+            }
+        }
+        
+        for(int i = 1;i < strs.size();i++){
+            int zeros = numsZero[i];
+            int ones = numsOne[i];
+            
+            for(int j = m;j >= zeros;j--){
+                for(int k = n;k >= ones;k--){
+                    dp[j][k] = max(dp[j][k],dp[j - zeros][k - ones] + 1);
+                }
+            }
+        }
+        return dp[m][n];
+    }
+};
+```
+
+### [518. 零钱兑换 II](https://leetcode.cn/problems/coin-change-ii/)
+
+```C++
+class Solution {
+public:
+    int change(int amount, vector<int>& coins) {
+        vector<vector<int>> dp(coins.size(),vector<int>(amount + 1,0));
+        
+        for(int i = 0;i < coints.size();i++){
+            dp[i][0] = 1;
+        }
+        
+        for(int i = coins[0];i <= amount;i++){
+            dp[0][i] = 1;
+        }
+        
+        for(int i = 1;i < coints.size();i++){
+            for(int j = 0;j <= amount;j++){
+                if(j < coins[i]) dp[i][j] = dp[i - 1][j];
+                else dp[i][j] = dp[i - 1][j] + dp[i][j - coints[i]];
+            }
+        }
+        return dp[coins.size() - 1][amount];
+    }
+};
+
+
+class Solution {
+public:
+    int change(int amount, vector<int>& coins) {
+        vector<unsigned long long> dp(amount + 1,0);
+        
+        
+        for(int i = coins[0];i <= amount;i++){
+            if(i % coins[0] == 0)
+                dp[i] = 1;
+        }
+        dp[0] = 1;
+        for(int i = 1;i < coins.size();i++){
+            for(int j = coins[i];j <= amount;j++){
+                dp[j] = dp[j] + dp[j - coins[i]];
+            }
+        }
+        return dp[amount];
+    }
+};
+```
+
+### [377. 组合总和 Ⅳ](https://leetcode.cn/problems/combination-sum-iv/)
+
+```C++
+class Solution {
+public:
+    int combinationSum4(vector<int>& nums, int target) {
+        vector<int> dp(target + 1,0);
+        
+        dp[0] = 1;
+        for(int j = 0;j <= target;j++){
+            for(int i = 0;i < nums.size();i++){
+                if(j < nums[i] && dp[j] < INT_MAX - dp[j - nums[i]]) dp[j] = dp[j] + dp[j - nums[i]];
+            }
+        }
+        return dp[target];
+    }
+};
+```
+
+### [322. 零钱兑换](https://leetcode.cn/problems/coin-change/)
+
+```C++
+class Solution {
+public:
+    int coinChange(vector<int>& coins, int amount) {
+        vector<vector<int>> dp(coins.size(),vector<int>(amount + 1,0x3fff));
+        
+        for(int i = 0;i < coins.size();i++){
+            dp[i][0] = 0;
+        }   
+        for(int i = 1;i <= amount;i++){
+            if(i % coins[0] == 0) dp[0][i] = i / coins[0];
+            else dp[0][i] = -1;
+        }
+        
+        for(int i = 1;i < coins.size();i++){
+            for(int j = 1;j <= amount;j++){
+                if(j < coins[i] || dp[i][j - coins[i]] == -1) dp[i][j] = dp[i - 1][j];
+                else{
+                    if(dp[i - 1][j] == -1) dp[i][j] = dp[i][j - coins[i]] + 1;
+                    else dp[i][j] = min(dp[i - 1][j],dp[i][j - coins[i]] + 1);
+                }
+            }
+        }
+        return dp[coins.size() - 1][amount];
+    }
+};
+
+class Solution {
+public:
+    int coinChange(vector<int>& coins, int amount) {
+        vector<int> dp(amount + 1,0x3fff);
+        
+        dp[0] = 0;
+        
+        for(int i = 0;i < coins.size();i++){
+            for(int j = coins[i];j <= amount;j++){
+                dp[j] = min(dp[j],dp[j - coins[i]] + 1);
+            }
+        }
+        if(dp[amount] == 0x3fff) return -1;
+        return dp[amount];
+    }
+};
+
+```
+
+### [279. 完全平方数](https://leetcode.cn/problems/perfect-squares/)
+
+```C++
+class Solution {
+public:
+    int numSquares(int n) {        
+        vector<int> dp(n + 1,0x3fff);
+        
+        dp[0] = 0;
+        
+        for(int i = 0;i <= n;i++){
+            for(int j = 1;j * j <= n;j++){
+               	dp[i] = min(dp[i],dp[i - j * j] + 1);
+            }
+        }
+        
+        return dp[n];
+    }
+};
+```
+
+###  [139. 单词拆分](https://leetcode.cn/problems/word-break/)
+
+```C++
+class Solution {
+public:
+    bool wordBreak(string s, vector<string>& wordDict) {
+        unordered_set<string> wordSet(wordDict.begin(),wordDict.end());
+        vector<bool> dp(s.size() + 1,false);
+        dp[0] = true;
+        
+        for(int i = 0;i <= s.size();i++){
+            for(int j = 0;j < i;j++){
+                string word = s.substr(j,i - j);
+                if(wordSet.find(word) != wordSet.end() && dp[j]){
+                    dp[i] = true;
+                }
+            }
+        }
+        return dp[s.size()];
+    }
+};
+```
+
+### [198. 打家劫舍](https://leetcode.cn/problems/house-robber/)
+
+```C++
+class Solution {
+public:
+    int rob(vector<int>& nums) {
+        vector<int> dp(nums.size(),0);
+        
+        if(nums.size() == 1) return nums[0];
+        if(nums.size() == 2) return max(nums[0],nums[1]);
+
+        dp[0] = nums[0];
+        dp[1] = max(nums[0],nums[1]);
+        
+        for(int i = 2;i < nums.size();i++){
+            dp[i] = max(dp[i - 1],dp[i - 2] + nums[i]);
+        }
+        
+        return dp[nums.size() - 1];
+    }
+};
+```
+
+### [213. 打家劫舍 II](https://leetcode.cn/problems/house-robber-ii/)
+
+```C++
+class Solution {
+public:
+    
+    int helper(vector<int> & nums,int l,int r){
+        vector<int> dp(nums.size(),0);
+        dp[l] = nums[l];
+        dp[l + 1] = max(nums[l],nums[l + 1]);
+        
+        for(int i = l + 2;i <= r;i++){
+            dp[i] = max(dp[i - 2] + nums[i],dp[i - 1]);
+        }
+        return dp[r];
+    }
+    
+    int rob(vector<int>& nums) {
+        vector<int> dp(nums.size() + 1,0);
+        
+        if(nums.size() == 1) return nums[0];
+        if(nums.size() == 2) return max(nums[0],nums[1]);
+
+        int case1 = helper(nums,0,nums.size() - 2);
+        int case2 = helper(nums,1,nums.size() - 1);
+        
+        return max(case1,case2);
+    }
+};
+```
+
+### [337. 打家劫舍 III](https://leetcode.cn/problems/house-robber-iii/)
+
+```C++
+class Solution {
+public:
+    
+    vector<int> helper(TreeNode * root){
+        if(root == nullptr) return {0,0};
+        
+        vector<int> left = helper(root->left);
+        vector<int> right = helper(root->right);
+        
+        int case1 = root->val + left[0] + right[0];
+        int case2 = max(left[0],left[1]) + max(right[0],right[1]);
+        
+        return {case2,case1};
+    }
+    
+    int rob(TreeNode* root) {
+        vector<int> result = helper(root);
+        return max(result[0],result[1]);
+    }
+};
+```
+
+### [121. 买卖股票的最佳时机](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/)
+
+```C++
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int low = 0x3fff;
+        int result = 0;
+        
+        for(int i = 1;i < prices.size();i++){
+            low = min(low,prices[i]);
+            result = max(result,prices[i] - low);
+        }
+        return result;
+    }
+};
+```
+
+### [300. 最长递增子序列](https://leetcode.cn/problems/longest-increasing-subsequence/)
+
+```C++
+class Solution {
+public:
+    int lengthOfLIS(vector<int>& nums) {
+        vector<int> dp(nums.size(),1);
+        
+        dp[0] = 1;
+        int result = 0;
+        for(int i = 1;i < nums.size();i++){
+            for(int j = i - 1;j >= 0;j--){
+                if(nums[j] < nums[i]){
+                    dp[i] = max(dp[i],dp[j] + 1);
+                }
+            }
+            if(dp[i] > result) result = dp[i];
+        }
+        return result;
+    }
+};
+```
+
+### [123. 买卖股票的最佳时机 III](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-iii/)
+
+```C++
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        vector<int> dp(5,0);
+        
+        dp[1] = -prices[0];
+        dp[3] = -prices[0];
+        
+        for(int i = 1;i < prices.size();i++){
+            dp[1] = max(dp[1],dp[0] - prices[i]);
+            dp[2] = max(dp[2],dp[1] + prices[i]);
+            dp[3] = max(dp[3],dp[2] - prices[i]);
+            dp[4] = max(dp[4],dp[3] + prices[i]);
+        }
+        return dp[4];
+    }
+};
+```
+
+### [188. 买卖股票的最佳时机 IV](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-iv/)
+
+```C++
+class Solution {
+public:
+    int maxProfit(int k, vector<int>& prices) {
+        vector<int> dp(2 * k + 1,0);
+        
+        for(int j = 1;j < 2 * k + 1;j += 2){
+            dp[j] = -prices[0];
+        }
+        
+        for(int i = 1;i < prices.size();i++){
+            for(int j = 0;j < 2 * k - 1;j += 2){
+                dp[j + 1] = max(dp[j + 1],dp[j] - prices[i]);
+                dp[j + 2] = max(dp[j + 2],dp[j + 1] + prices[i]);
+            }
+        }
+        
+        return dp[2 * k];
+    }
+};
+```
+
+### [309. 买卖股票的最佳时机含冷冻期](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-cooldown/)
+
+```C++
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        if(prices.size() == 1) return 0;
+        if(prices.size() == 2){
+            if(prices[0] < prices[1]) return prices[1] - prices[0];
+            else return 0;
+        }
+        
+        vector<int> dp(prices.size(),vector<int>(2,0));
+        
+        dp[0][0] = -prices[0];
+        dp[1][0] = -prices[1];
+        dp[1][1] = max(dp[0][1], dp[0][0] + prices[1]);
+        
+        for(int i = 2;i < prices.size();i++){
+            dp[i][0] = max(dp[i - 1][0],dp[i - 2][1] - prices[i]);
+            dp[i][1] = max(dp[i - 1][1],dp[i - 1][0] + prices[i]);
+        }
+        
+        return dp[prices.size() - 1][1];
+    }
+};
+```
+
+### [714. 买卖股票的最佳时机含手续费](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/)
+
+```C++
+class Solution {
+public:
+    int maxProfit(vector<int>& prices, int fee) {
+        vector<int> dp(2,0);
+        dp[0] = -prices[0];
+        for(int i = 1;i < prices.size();i++){
+            dp[0] = max(dp[0],dp[1] - prices[i]);
+            dp[1] = max(dp[1],dp[0] + prices[i] - fee);
+        }
+        return dp[1];
+    }
+};
+```
+
+### [718. 最长重复子数组](https://leetcode.cn/problems/maximum-length-of-repeated-subarray/)
+
+```C++
+class Solution {
+public:
+    int findLength(vector<int>& nums1, vector<int>& nums2) {
+        vector<vector<int>> dp(nums1.size() + 1,vector<int>(nums2.size(),0));
     }
 };
 ```
