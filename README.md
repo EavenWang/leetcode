@@ -1,2 +1,2 @@
 # -
-刷算法题的日记
+records about sloving leetcode's problems
