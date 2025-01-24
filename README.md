@@ -1,2 +1,1 @@
-# -
-records about sloving leetcode's problems
+records about solving leetcode's problems
