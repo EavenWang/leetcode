@@ -4260,3 +4260,112 @@ public:
 };
 ```
 
+## 2025.2
+
+### 所有可达路径
+
+```C++
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+const int N = 110;
+const int M = 510;
+
+int e[N][N];
+
+int n,m;
+vector<int> path;
+vector<vector<int>> result;
+void dfs(int start){
+    if(start == n){
+        result.push_back(path);
+        return;
+    }
+
+    for(int i = 1;i <= n;i++){
+        if(e[start][i] == 1){
+            path.push_back(i);
+            dfs(i);
+            path.pop_back();
+        }
+    }
+}
+
+int main(){
+ 
+    cin >> n >> m;
+    for(int i = 0;i < m;i++){
+        int a,b;
+        cin >> a >> b;
+        e[a][b] = 1;
+    }
+    
+    path.push_back(1);
+    dfs(1);
+    if(result.size() == 0) cout << -1 << "\n";
+    for(const vector<int> & pa : result){
+        for(int i = 0;i < pa.size() - 1;i++){
+            cout << pa[i] << " ";
+        }
+        cout << pa[pa.size() - 1] << "\n";
+    }
+    return 0;
+}
+
+//邻接表写法
+#include <iostream>
+#include <vector>
+#include <list>
+
+using namespace std;
+
+const int N = 110;
+const int M = 510;
+
+
+int n,m;
+vector<int> path;
+vector<vector<int>> result;
+
+void dfs(vector<list<int>> & graph,int start){
+    if(start == n){
+        result.push_back(path);
+        return;
+    }
+
+    for(int i : graph[start]){
+        path.push_back(i);
+        dfs(graph,i);
+        path.pop_back();
+    }
+}
+
+int main(){
+     
+    cin >> n >> m;
+
+    vector<list<int>> graph(n + 1);
+
+    for(int i = 0;i < m;i++){
+        int a,b;
+        cin >> a >> b;
+        graph[a].push_back(b);
+    }
+    
+    path.push_back(1);
+    dfs(graph,1);
+
+    if(result.size() == 0) cout << -1 << "\n";
+    
+    for(const vector<int> & pa : result){
+        for(int i = 0;i < pa.size() - 1;i++){
+            cout << pa[i] << " ";
+        }
+        cout << pa[pa.size() - 1] << "\n";
+    }
+    return 0;
+}
+```
+
