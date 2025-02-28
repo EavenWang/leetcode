@@ -4369,3 +4369,133 @@ int main(){
 }
 ```
 
+### 岛屿数量(深搜)
+
+```C++
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <sstream>
+#include <set>
+
+using namespace std;
+
+int dt[4][2] = {0, 1, 1, 0, -1, 0, 0, -1};
+
+void dfs(vector<vector<int>> & grid,vector<vector<int>> & visited,int x,int y){
+    for(int i = 0;i < 4;i++){
+        int a = x + dt[i][0];
+        int b = y + dt[i][1];
+
+        if(a >= 0 && a < grid.size() && b >= 0 && b < grid[0].size() && grid[a][b] == 1 && !visited[a][b]){
+            visited[a][b] = true;
+            dfs(grid,visited,a,b);
+        }
+    }
+}
+
+int main(){
+
+    int n,m;
+
+    cin >> n >> m;
+
+    vector<vector<int>> grid(n,vector<int>(m,0));
+
+    for(int i = 0;i < n;i++){
+        for(int j = 0;j < m;j++){
+            cin >> grid[i][j];
+        }
+    }
+
+    vector<vector<int>> visited(n,vector<int>(m,false));
+
+    int result = 0;
+    for(int i = 0;i < n;i++){
+        for(int j = 0;j < m;j++){
+            if(!visited[i][j] && grid[i][j] == 1){
+                result++;
+                visited[i][j] = true;
+                dfs(grid,visited,i,j);
+            }
+        }
+    }
+    
+    cout << result;
+    return 0;
+}
+```
+
+### 岛屿数量(广搜)
+
+```C++
+#include <iostream>
+#include <string>
+#include <vector>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <sstream>
+#include <set>
+
+using namespace std;
+
+int dt[4][2] = {0, 1, 1, 0, -1, 0, 0, -1};
+
+void bfs(vector<vector<int>> & grid,vector<vector<int>> & visited,int x,int y){
+    queue<pair<int,int>> q;
+    visited[x][y] = true;
+    q.push({x,y});
+
+    while(!q.empty()){
+        pair<int,int> pos = q.front(); q.pop();
+
+        int curX = pos.first;
+        int curY = pos.second;
+
+        for(int i = 0;i < 4;i++){
+            int a = curX + dt[i][0];
+            int b = curY + dt[i][1];
+            if(a >= 0 && a < grid.size() && b >= 0 && b < grid[0].size() && !visited[a][b] && grid[a][b] == 1){
+                visited[a][b] = true;
+                q.push({a,b});
+            }
+        }
+    }
+}
+
+int main(){
+
+    int n,m;
+
+    cin >> n >> m;
+
+    vector<vector<int>> grid(n,vector<int>(m,0));
+
+    for(int i = 0;i < n;i++){
+        for(int j = 0;j < m;j++){
+            cin >> grid[i][j];
+        }
+    }
+
+    vector<vector<int>> visited(n,vector<int>(m,false));
+
+    int result = 0;
+    for(int i = 0;i < n;i++){
+        for(int j = 0;j < m;j++){
+            if(!visited[i][j] && grid[i][j] == 1){
+                result++;
+                bfs(grid,visited,i,j);
+            }
+        }
+    }
+    
+    cout << result;
+    return 0;
+}
+```
+
