@@ -4499,3 +4499,1654 @@ int main(){
 }
 ```
 
+### 岛屿的最大面积
+
+```C++
+#include <iostream>
+#include <string>
+#include <vector>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <sstream>
+#include <set>
+
+using namespace std;
+
+int dt[4][2] = {0, 1, 1, 0, -1, 0, 0, -1};
+
+int cnt = 0;
+
+void bfs(vector<vector<int>> & grid,vector<vector<int>> & visited,int x,int y){
+    queue<pair<int,int>> q;
+    visited[x][y] = true;
+    q.push({x,y});
+    cnt++;
+    while(!q.empty()){
+        pair<int,int> pos = q.front(); q.pop();
+
+        int curX = pos.first;
+        int curY = pos.second;
+
+        for(int i = 0;i < 4;i++){
+            int a = curX + dt[i][0];
+            int b = curY + dt[i][1];
+            if(a >= 0 && a < grid.size() && b >= 0 && b < grid[0].size() && !visited[a][b] && grid[a][b] == 1){
+                visited[a][b] = true;
+                cnt++;
+                q.push({a,b});
+            }
+        }
+    }
+}
+
+int main(){
+
+    int n,m;
+
+    cin >> n >> m;
+
+    vector<vector<int>> grid(n,vector<int>(m,0));
+
+    for(int i = 0;i < n;i++){
+        for(int j = 0;j < m;j++){
+            cin >> grid[i][j];
+        }
+    }
+
+    vector<vector<int>> visited(n,vector<int>(m,false));
+
+    int result = 0;
+    for(int i = 0;i < n;i++){
+        for(int j = 0;j < m;j++){
+            if(!visited[i][j] && grid[i][j] == 1){
+                cnt = 0;
+                bfs(grid,visited,i,j);
+                result = max(cnt,result);
+            }
+        }
+    }
+    
+    cout << result;
+    return 0;
+}
+```
+
+## 2025.3
+
+###  孤岛的总面积
+
+```C++
+#include <iostream>
+#include <string>
+#include <vector>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <sstream>
+#include <set>
+
+using namespace std;
+
+int dt[4][2] = {0, 1, 1, 0, -1, 0, 0, -1};
+
+int cnt = 0;
+
+void dfs(vector<vector<int>> & grid,vector<vector<bool>> & visited,int x,int y){
+    visited[x][y] = true;
+    cnt++;
+    for(int i = 0;i < 4;i++){
+        int a = x + dt[i][0];
+        int b = y + dt[i][1];
+
+         if(a >= 0 && b >= 0 && a < grid.size() && b < grid[0].size() && grid[a][b] == 1 && !visited[a][b]){
+            dfs(grid,visited,a,b);    
+        }
+        
+    }
+}
+
+
+void bfs(vector<vector<int>> & grid,vector<vector<bool>> & visited,int x,int y){
+    queue<pair<int,int>> q;
+    visited[x][y] = true;
+
+    q.push({x,y});
+    cnt++;
+    while(!q.empty()){
+        pair<int,int> pos = q.front();q.pop();
+
+        int curX = pos.first;
+        int curY = pos.second;
+
+        for(int i = 0;i < 4;i++){
+            int a = dt[i][0] + curX;
+            int b = dt[i][1] + curY;
+
+            if(a >= 0 && b >= 0 && a < grid.size() && b < grid[0].size() && grid[a][b] == 1 && !visited[a][b]){
+                visited[a][b] = true;
+                cnt++;
+                q.push({a,b});
+            }
+        }
+    }
+}
+
+
+int main(){
+
+    int n,m;
+
+    cin >> n >> m;
+
+    vector<vector<int>> grid(n,vector<int>(m,0));
+
+    for(int i = 0;i < n;i++){
+        for(int j = 0;j < m;j++){
+            cin >> grid[i][j];
+        }
+    }
+
+    vector<vector<bool>> visited(n,vector<bool>(m,false));
+    
+    for(int i = 0;i < m;i++){
+        if(grid[0][i] == 1 && !visited[0][i]) dfs(grid,visited,0,i);
+        if(grid[n - 1][i] == 1 && !visited[n - 1][i]) dfs(grid,visited,n - 1,i);
+    }
+
+    for(int i = 0;i < n;i++){
+        if(grid[i][0] == 1 && !visited[i][0]) dfs(grid,visited,i,0);
+        if(grid[i][m - 1] == 1 && !visited[i][m - 1]) dfs(grid,visited,i,m - 1);
+    }
+    cnt = 0;
+    for(int i = 0;i < n;i++){
+        for(int j = 0;j < m;j++){
+            if(grid[i][j] == 1 && !visited[i][j]){
+                dfs(grid,visited,i,j);
+            }
+        }
+    }
+
+
+    cout << cnt;
+    return 0;
+}
+```
+
+### 沉没孤岛
+
+```C++
+#include <iostream>
+#include <string>
+#include <vector>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <sstream>
+#include <set>
+
+using namespace std;
+
+int dt[4][2] = {0, 1, 1, 0, -1, 0, 0, -1};
+
+int cnt = 0;
+
+void dfs(vector<vector<int>> & grid,vector<vector<bool>> & visited,int x,int y){
+    visited[x][y] = true;
+    grid[x][y] = 2;
+    cnt++;
+    for(int i = 0;i < 4;i++){
+        int a = x + dt[i][0];
+        int b = y + dt[i][1];
+
+         if(a >= 0 && b >= 0 && a < grid.size() && b < grid[0].size() && grid[a][b] == 1 && !visited[a][b]){
+            dfs(grid,visited,a,b);    
+        }
+        
+    }
+}
+
+
+void bfs(vector<vector<int>> & grid,vector<vector<bool>> & visited,int x,int y){
+    queue<pair<int,int>> q;
+    visited[x][y] = true;
+
+    q.push({x,y});
+    cnt++;
+    while(!q.empty()){
+        pair<int,int> pos = q.front();q.pop();
+
+        int curX = pos.first;
+        int curY = pos.second;
+
+        for(int i = 0;i < 4;i++){
+            int a = dt[i][0] + curX;
+            int b = dt[i][1] + curY;
+
+            if(a >= 0 && b >= 0 && a < grid.size() && b < grid[0].size() && grid[a][b] == 1 && !visited[a][b]){
+                visited[a][b] = true;
+                cnt++;
+                q.push({a,b});
+            }
+        }
+    }
+}
+
+
+int main(){
+
+    int n,m;
+
+    cin >> n >> m;
+
+    vector<vector<int>> grid(n,vector<int>(m,0));
+
+    for(int i = 0;i < n;i++){
+        for(int j = 0;j < m;j++){
+            cin >> grid[i][j];
+        }
+    }
+
+    vector<vector<bool>> visited(n,vector<bool>(m,false));
+    
+    for(int i = 0;i < m;i++){
+        if(grid[0][i] == 1 && !visited[0][i]) dfs(grid,visited,0,i);
+        if(grid[n - 1][i] == 1 && !visited[n - 1][i]) dfs(grid,visited,n - 1,i);
+    }
+
+    for(int i = 0;i < n;i++){
+        if(grid[i][0] == 1 && !visited[i][0]) dfs(grid,visited,i,0);
+        if(grid[i][m - 1] == 1 && !visited[i][m - 1]) dfs(grid,visited,i,m - 1);
+    }
+
+    for(int i = 0;i < n;i++){
+        for(int j = 0;j < m;j++){
+            if(grid[i][j] == 1) grid[i][j] = 0;
+            if(grid[i][j] == 2) grid[i][j] = 1;
+        }
+    }
+
+    for(int i = 0;i < n;i++){
+        for(int j = 0;j < m;j++){
+            cout << grid[i][j] << " ";
+        }
+        cout << "\n";
+    }
+
+    return 0;
+}
+```
+
+### 水流问题
+
+```C++
+#include <iostream>
+#include <string>
+#include <vector>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <sstream>
+#include <set>
+
+using namespace std;
+
+int dt[4][2] = {0,1,1,0,0,-1,-1,0};
+
+int cnt = 0;
+
+void dfs(vector<vector<int>> & grid,vector<vector<bool>> & border,int x,int y){
+    border[x][y] = true;
+
+    for(int i = 0;i < 4;i++){
+        int a = x + dt[i][0];
+        int b = y + dt[i][1];
+
+        if(a >= 0 && b >= 0 && a < grid.size() && b < grid[0].size() && border[a][b] == false){
+            if(grid[x][y] <= grid[a][b]){
+                dfs(grid,border,a,b);
+            }
+        }
+    }
+}
+
+
+int main(){
+
+    int n,m;
+
+    cin >> n >> m;
+
+    vector<vector<int>> grid(n,vector<int>(m,0));
+    vector<vector<bool>> firstBorder(n,vector<bool>(m,false));
+    vector<vector<bool>> secondBorder(n,vector<bool>(m,false));
+
+
+    for(int i = 0;i < n;i++){
+        for(int j = 0;j < m;j++){
+            cin >> grid[i][j];
+        }
+    }
+
+    for(int i = 0; i < m;i++){
+        dfs(grid,firstBorder,0,i);
+        dfs(grid,secondBorder,n - 1,i);
+    }
+
+    for(int i = 0;i < n;i++){
+        dfs(grid,firstBorder,i,0);
+        dfs(grid,secondBorder,i,m - 1);
+    }
+
+    for(int i = 0;i < n;i++){
+        for(int j = 0;j < m;j++){
+            if(firstBorder[i][j] && secondBorder[i][j]){
+                cout << i << " " << j << "\n";
+            }
+        }
+    }
+
+    return 0;
+}
+```
+
+### 建造最大岛屿
+
+```C++
+#include <iostream>
+#include <string>
+#include <vector>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <sstream>
+#include <set>
+
+using namespace std;
+
+int dt[4][2] = {0,1,1,0,0,-1,-1,0};
+
+int cnt = 0;
+
+void dfs(vector<vector<int>> & grid,vector<vector<bool>> & visited,int x,int y,int mark){
+    visited[x][y] = true;
+    grid[x][y] = mark;
+    cnt++;
+    for(int i = 0;i < 4;i++){
+        int a = x + dt[i][0];
+        int b = y + dt[i][1];
+        if(a >= 0 && b >= 0 && a < grid.size() && b < grid[0].size() && grid[a][b] == 1 && !visited[a][b]){
+            dfs(grid,visited,a,b,mark);
+        }
+    }
+}
+
+
+int main(){
+
+    int n,m;
+
+    cin >> n >> m;
+
+    vector<vector<int>> grid(n,vector<int>(m,0));
+
+    vector<vector<bool>> visited(n,vector<bool>(m,false));
+
+    for(int i = 0;i < n;i++){
+        for(int j = 0;j < m;j++){
+            cin >> grid[i][j];
+        }
+    }
+    
+    unordered_map<int,int> gridNum;
+
+    int mark = 2;
+    bool isAllGrid = true;
+
+    for(int i = 0;i < n;i++){
+        for(int j = 0;j < m;j++){
+            if(grid[i][j] == 0) isAllGrid = false;
+            if(!visited[i][j] && grid[i][j] == 1){
+                cnt = 0;
+                dfs(grid,visited,i,j,mark);
+                gridNum[mark] = cnt;
+                mark++;
+            }
+        }
+    }
+
+    if(isAllGrid){
+        cout << n * m << "\n";
+        return 0;
+    }
+
+    int result = 0;
+    unordered_set<int> visitedGrid;
+
+    for(int i = 0;i < n;i++){
+        for(int j = 0;j < m;j++){
+
+            if(grid[i][j] != 0) continue;
+            cnt = 1;
+            visitedGrid.clear();
+            for(int k = 0;k < 4;k++){
+                int a = i + dt[k][0];
+                int b = j + dt[k][1];
+                if(a >= 0 && a < grid.size() && b >= 0 && b < grid[0].size()){
+                    if(visitedGrid.find(grid[a][b]) == visitedGrid.end()){
+                        visitedGrid.insert(grid[a][b]);
+                        cnt += gridNum[grid[a][b]];
+                    }
+                }
+            }
+            result = max(result,cnt);
+        }
+    }
+
+    cout << result << "\n";
+
+    return 0;
+}
+```
+
+### 字符串接龙
+
+```C++
+#include <iostream>
+#include <string>
+#include <vector>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <sstream>
+#include <set>
+
+using namespace std;
+
+int dt[4][2] = {0,1,1,0,0,-1,-1,0};
+
+int cnt = 0;
+
+
+int main(){
+
+    int n;
+
+    cin >> n;
+
+    string beginStr,endStr;
+
+    cin >> beginStr >> endStr;
+
+    unordered_set<string> strSet;
+
+    for(int i = 0;i < n;i++){
+        string w;
+        cin >> w;
+        strSet.insert(w);
+    }
+
+    queue<string> q;
+
+    unordered_map<string,int> umap;
+
+    q.push(beginStr);
+
+    umap.insert({beginStr,1});
+
+    while(!q.empty()){
+        string word = q.front();q.pop();
+        int path = umap[word];
+
+        for(int i = 0;i < word.size();i++){
+            string newWord = word;
+
+            for(int j = 0;j < 26;j++){
+                newWord[i] = j + 'a';
+
+                if(newWord == endStr){
+                    cout << path + 1 << "\n";
+                    return 0;
+                }
+
+                if(strSet.find(newWord) != strSet.end() && umap.find(newWord) == umap.end()){
+                    q.push(newWord);
+                    umap.insert({newWord,path + 1});
+                }
+
+            }
+        }
+    }
+
+    cout << 0 << "\n";
+
+    return 0;
+}
+```
+
+### 有向图的完全可达性
+
+```C++
+#include <iostream>
+#include <string>
+#include <vector>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <sstream>
+#include <set>
+#include <list>
+
+using namespace std;
+
+int dt[4][2] = {0,1,1,0,0,-1,-1,0};
+
+void dfs(vector<list<int>> & graph,vector<bool> & visited,int x){
+    
+    list<int> l = graph[x];
+    for(const int & p:l){
+        if(visited[p] == false){
+            visited[p] = true;
+            dfs(graph,visited,p);
+        }
+    }
+}
+
+
+int main(){
+
+    int n,m;
+
+    cin >> n >> m;
+
+    vector<list<int>> graph(n + 1);
+
+    for(int i = 0;i < m;i++){
+        int a,b;
+        cin >> a >> b;
+        graph[a].push_back(b);
+    }
+
+    vector<bool> visited(n + 1,false);
+
+    visited[1] = true;
+
+    dfs(graph,visited,1);
+
+    for(int i = 1;i <= n;i++){
+        if(visited[i] == false){
+            cout << -1 << "\n";
+            return 0;
+        }
+    }
+
+    cout << 1 << "\n";
+
+
+    return 0;
+}
+```
+
+### 岛屿的周长
+
+```C++
+#include <iostream>
+#include <string>
+#include <vector>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <sstream>
+#include <set>
+#include <list>
+
+using namespace std;
+
+int dt[4][2] = {0,1,1,0,0,-1,-1,0};
+
+
+int main(){
+
+    int n,m;
+
+    cin >> n >> m;
+
+    vector<vector<int>> graph(n,vector<int>(m,0));
+
+    for(int i = 0;i < n;i++){
+        for(int j = 0;j < m;j++){
+            cin >> graph[i][j];
+        }
+    }
+
+    int result = 0;
+
+    for(int i = 0;i < n;i++){
+        for(int j = 0;j < m;j++){
+            if(graph[i][j] == 1){
+                for(int k = 0;k < 4;k++){
+                    int x = i + dt[k][0];
+                    int y = j + dt[k][1];
+                    if(x < 0 || y < 0 || x >= graph.size() || y >= graph[0].size() || graph[x][y] == 0){
+                        result++;
+                    }
+                }
+            }
+        }
+    }
+
+    cout << result;
+
+    return 0;
+}
+```
+
+### 寻找存在的路径
+
+```C++
+#include <iostream>
+#include <string>
+#include <vector>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <sstream>
+#include <set>
+#include <list>
+
+using namespace std;
+
+int dt[4][2] = {0,1,1,0,0,-1,-1,0};
+
+const int N = 10010;
+
+vector<int> father(N,0);
+
+void init(){
+    for(int i = 0;i < N;i++){
+        father[i] = i;
+    }
+}
+
+int find(int u){
+    if(father[u] == u) return u;
+
+    else return father[u] = find(father[u]);
+}
+
+bool isSame(int u,int v){
+    u = find(u);
+    v = find(v);
+
+    return u == v;
+}
+
+void joint(int u,int v){
+    u = find(u);
+    v = find(v);
+    if(u == v) return ;
+
+    father[v] = u;
+}
+
+
+int main(){
+
+    int n,m;
+
+    init();
+
+    cin >> n >> m;
+
+    for(int i = 0;i < m;i++){
+        int a,b;
+        cin >> a >> b;
+        joint(a,b);
+    }
+
+    int s,d;
+
+    cin >> s >> d;
+
+    if(isSame(s,d)){
+        cout << 1 << "\n";
+    }else{
+        cout << 0 << "\n";
+    }
+
+
+    return 0;
+}
+```
+
+### 冗余连接
+
+```C++
+#include <iostream>
+#include <string>
+#include <vector>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <sstream>
+#include <set>
+#include <list>
+
+using namespace std;
+
+int dt[4][2] = {0,1,1,0,0,-1,-1,0};
+
+const int N = 10010;
+
+vector<int> father(N,0);
+
+void init(){
+    for(int i = 0;i < N;i++){
+        father[i] = i;
+    }
+}
+
+int find(int u){
+    if(father[u] == u) return u;
+    else return father[u] = find(father[u]);
+}
+
+int isSame(int u,int v){
+    u = find(u);
+    v = find(v);
+    return u == v;
+}
+
+void joint(int u,int v){
+    u = find(u);
+    v = find(v);
+    if(u == v) return ;
+    father[v] = u;
+}
+
+int main(){
+
+    int n;
+
+    init();
+
+    cin >> n;
+
+    for(int i = 0;i < n;i++){
+        int a,b;
+        cin >> a >> b;
+
+        if(isSame(a,b)){
+            cout << a << " " << b;
+            return 0;
+        }
+
+        joint(a,b);
+    }
+
+    return 0;
+}
+```
+
+### 冗余连接II
+
+```C++
+#include <iostream>
+#include <string>
+#include <vector>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <sstream>
+#include <set>
+#include <list>
+
+using namespace std;
+
+int dt[4][2] = {0,1,1,0,0,-1,-1,0};
+
+const int N = 10010;
+int n;
+vector<int> father(N,0);
+
+void init(){
+    for(int i = 0;i < N;i++){
+        father[i] = i;
+    }
+}
+
+int find(int u){
+    if(father[u] == u) return u;
+    else return father[u] = find(father[u]);
+}
+
+int isSame(int u,int v){
+    u = find(u);
+    v = find(v);
+    return u == v;
+}
+
+void joint(int u,int v){
+    u = find(u);
+    v = find(v);
+    if(u == v) return ;
+    father[v] = u;
+}
+
+void getRemoveEdge(const vector<vector<int>> & edges){
+    init();
+    for(int i = 0;i < n;i++){
+        if(isSame(edges[i][0],edges[i][1])){
+            cout << edges[i][0] << " " << edges[i][1];
+            return;
+        }else{
+            joint(edges[i][0],edges[i][1]);
+        }
+    }
+}
+
+bool isTreeAfterRemoveEdge(const vector<vector<int>> & edges,int deleteEdge){
+    init();
+    for(int i = 0;i < n;i++){
+        if(i == deleteEdge) continue;
+        if(isSame(edges[i][0],edges[i][1])){
+            return false;
+        }
+        joint(edges[i][0],edges[i][1]);
+    }
+    return true;
+}
+
+int main(){
+
+    cin >> n;
+    vector<vector<int>> edges;
+    vector<int> inDegree(n + 1,0);
+    for(int i = 0;i < n;i++){
+        int s,t;
+        cin >> s >> t;
+        inDegree[t]++;
+        edges.push_back({s,t});
+    }
+
+    vector<int> vec;
+
+    for(int i = n - 1;i >= 0;i--){
+        if(inDegree[edges[i][1]] == 2){
+            vec.push_back(i);
+        }
+    }
+
+    if(vec.size() > 0){
+        if(isTreeAfterRemoveEdge(edges,vec[0])){
+            cout << edges[vec[0]][0] << " " << edges[vec[0]][1];
+        }else{
+            cout << edges[vec[1]][0] << " " << edges[vec[1]][1];
+        }
+        return 0;
+    }
+
+    getRemoveEdge(edges);
+
+    return 0;
+}
+```
+
+### 寻宝（prim算法）
+
+```C++
+#include <iostream>
+#include <string>
+#include <vector>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <sstream>
+#include <set>
+#include <list>
+#include <climits>
+
+using namespace std;
+
+int main(){
+
+    int v,e;
+    cin >> v >> e;
+
+    vector<vector<int>> grid(v + 1,vector<int>(v + 1,0x3fff));
+
+    for(int i = 0;i < e;i++){
+        int x,y,k;
+
+        cin >> x >> y >> k;
+
+        grid[x][y] = k;
+        grid[y][x] = k;
+    }
+
+    vector<int> minDst(v + 1,0x3fff);
+    vector<int> isInTree(v + 1,false);
+
+    for(int i = 1;i < v;i++){
+        int cur = 01;
+        int minVal = INT_MAX;
+        for(int j = 1;j <= v;j++){
+            if(!isInTree[j] &&minDst[j] < minVal){
+                minVal = minDst[j];
+                cur = j;
+            }
+        }
+
+        isInTree[cur] = true;
+
+        for(int j = 1;j <= v;j++){
+            if(!isInTree[j] && grid[cur][j] < minDst[j]){
+                minDst[j] = grid[cur][j];
+            }
+        }
+    }
+
+    int result = 0;
+
+    for(int i = 2;i <= v;i++){
+        result += minDst[i];
+    }
+
+    cout << result << "\n";
+
+    return 0;
+}
+```
+
+### 寻宝（kruskal算法）
+
+```C++
+#include <iostream>
+#include <string>
+#include <vector>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <sstream>
+#include <set>
+#include <list>
+#include <climits>
+
+using namespace std;
+
+struct Edge{
+    int l,r,val;
+};
+
+const int N = 10010;
+
+vector<int> father(N,-1);
+
+void init(){
+
+    for(int i = 0;i < N;i++){
+        father[i] = i;
+    }
+}
+
+int find(int u){
+    if(father[u] == u) return u;
+    else return father[u] = find(father[u]);
+}
+
+bool isSame(int u,int v){
+    u = find(u);
+    v = find(v);
+    return u == v;
+}
+
+void joint(int u,int v){
+    u = find(u);
+    v = find(v);
+    if(u == v) return;
+    father[v] = u;
+}
+
+int main(){
+
+    int v,e;
+    cin >> v >> e;
+    vector<Edge> edges;
+
+    for(int i = 0;i < e;i++){
+        int v1,v2,val;
+        cin >> v1 >> v2 >> val;
+        edges.push_back({v1,v2,val});
+    }
+
+    sort(edges.begin(),edges.end(),[](const Edge & a,const Edge & b){
+        return a.val < b.val;
+    });
+
+    init();
+
+    int result = 0;
+
+    for(const Edge & edge : edges){
+        int x = find(edge.l);
+        int y = find(edge.r);
+
+        if(x != y){
+            result += edge.val;
+            joint(x,y);
+        }
+    }
+    
+    cout << result << "\n";
+
+    return 0;
+}
+```
+
+### 软件构建
+
+```C++
+#include <iostream>
+#include <string>
+#include <vector>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <sstream>
+#include <set>
+#include <list>
+#include <climits>
+
+using namespace std;
+
+
+int main(){
+
+    int n,m;
+
+    cin >> n >> m;
+
+    vector<int> inDegree(n,0);
+    vector<int> result;
+    unordered_map<int,vector<int>> umap;
+
+    while(m--){
+        int s,t;
+        cin >> s >> t;
+        inDegree[t]++;
+        umap[s].push_back(t);
+    }
+
+    queue<int> q;
+
+    for(int i = 0;i < n;i++){
+        if(inDegree[i] == 0) q.push(i);
+    }
+
+    while(!q.empty()){
+        int cur = q.front();q.pop();
+        result.push_back(cur);
+        vector<int> files = umap[cur];
+        for(int i = 0;i < files.size();i++){
+            inDegree[files[i]]--;
+            if(inDegree[files[i]] == 0) q.push(files[i]); 
+        }
+    }
+
+    if(result.size() == n){
+        for(int i = 0;i < n - 1;i++) cout << result[i] << " ";
+        cout << result[n - 1] << "\n";
+    }else{
+        cout << -1 << "\n";
+    }
+
+    return 0;
+}
+```
+
+### 参加科学大会（dijkstra朴素版）
+
+```C++
+#include <iostream>
+#include <string>
+#include <vector>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <sstream>
+#include <set>
+#include <list>
+#include <stdint.h>
+
+using namespace std;
+
+
+int main(){
+
+    int n,m;
+    cin >> n >> m;
+
+    vector<vector<int>> grid(n + 1,vector<int>(n + 1,INT32_MAX));
+
+    for(int i = 0;i < m;i++){
+        int p1,p2,val;
+        cin >> p1 >> p2 >> val;
+        grid[p1][p2] = val;
+    }
+
+    vector<int> minDst(n + 1,INT32_MAX);
+    vector<bool> visited(n + 1,false);
+
+    minDst[1] = 0;
+
+    for(int i = 1;i <= n;i++){
+        int minVal = INT32_MAX;
+        int cur = 1;
+
+        for(int j = 1;j <= n;j++){
+            if(!visited[j] && minDst[j] < minVal){
+                minVal = minDst[j];
+                cur = j;
+            }
+        }
+
+        visited[cur] = true;
+
+        for(int j = 1;j <= n;j++){
+            if(!visited[j] && grid[cur][j] != INT32_MAX && minDst[cur] + grid[cur][j] < minDst[j]){
+                minDst[j] = minDst[cur] + grid[cur][j];
+            }
+        }
+    }
+
+    if(minDst[n] == INT32_MAX) cout << -1 << "\n";
+    else cout << minDst[n] << "\n";
+    
+    return 0;
+}
+```
+
+### 参加科学大会（dijkstra堆优化）
+
+```C++
+#include <iostream>
+#include <string>
+#include <vector>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <sstream>
+#include <set>
+#include <list>
+#include <stdint.h>
+
+using namespace std;
+
+struct Edge{
+    int to;
+    int val;
+    Edge(int a,int b):to(a),val(b){}
+};
+
+struct MyCompare{
+    bool operator()(const pair<int,int> & lhs,const pair<int,int> & rhs){
+        return lhs.second > rhs.second;
+    }
+};
+
+int main(){
+
+    int n,m;
+    cin >> n >> m;
+
+    vector<list<Edge>> grid(n + 1);
+
+    for(int i = 0;i < m;i++){
+        int p1,p2,val;
+        cin >> p1 >> p2 >> val;
+        grid[p1].push_back(Edge(p2,val));
+    }
+
+
+    vector<int> minDst(n + 1,INT32_MAX);
+    vector<bool> visited(n + 1,false);
+
+    priority_queue<pair<int,int>,vector<pair<int,int>>,MyCompare> pq;
+
+    pq.push({1,0});
+
+    minDst[1] = 0;
+
+    while(!pq.empty()){
+        pair<int,int> cur = pq.top();pq.pop();
+
+        if(visited[cur.first]) continue;
+
+        visited[cur.first] = true;
+
+        for(Edge & edge: grid[cur.first]){
+            if(!visited[edge.to] && minDst[cur.first] + edge.val < minDst[edge.to]){
+                minDst[edge.to] = minDst[cur.first] + edge.val;
+                pq.push({edge.to,minDst[edge.to]});
+            }
+        }
+    }
+
+    if(minDst[n] == INT32_MAX) cout << -1 << "\n";
+    else cout << minDst[n] << "\n";
+    
+    return 0;
+}
+```
+
+###  城市间货物运输 I(Bellman_ford )
+
+```C++
+#include <iostream>
+#include <string>
+#include <vector>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <sstream>
+#include <set>
+#include <list>
+#include <stdint.h>
+
+using namespace std;
+
+int main(){
+
+    int n,m;
+    cin >> n >> m;
+
+    vector<vector<int>> grid;
+
+    for(int i = 0;i < m;i++){
+        int p1,p2,val;
+        cin >> p1 >> p2 >> val;
+        grid.push_back({p1,p2,val});
+    }
+    
+    vector<int> minDst(n + 1,INT32_MAX);
+    minDst[1] = 0;
+    for(int i = 1;i < n;i++){
+        for(vector<int> & side : grid){
+            int from = side[0];
+            int to = side[1];
+            int val = side[2];
+
+            if(minDst[from] != INT32_MAX && minDst[to] > minDst[from] + val){
+                minDst[to] = minDst[from] + val;
+            }
+        }
+    }
+    
+    if(minDst[n] == INT32_MAX) cout << "unconnected" << "\n";
+    else cout << minDst[n] << "\n";
+    
+    return 0;
+}
+```
+
+### 城市间货物运输 I(Bellman_ford 队列优化)
+
+```C++
+#include <iostream>
+#include <string>
+#include <vector>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <sstream>
+#include <set>
+#include <list>
+#include <stdint.h>
+
+using namespace std;
+
+struct Edge{
+    int to;
+    int val;
+    Edge(int a,int b):to(a),val(b){}
+};
+
+
+int main(){
+
+    int n,m;
+    cin >> n >> m;
+
+    vector<list<Edge>> grid(n + 1);
+
+    for(int i = 0;i < m;i++){
+        int p1,p2,val;
+        cin >> p1 >> p2 >> val;
+        grid[p1].push_back(Edge(p2,val));
+    }
+
+    vector<bool> inQ(n + 1,false);
+    
+    vector<int> minDst(n + 1,INT32_MAX);
+    
+    queue<int> q;
+
+    minDst[1] = 0;
+    q.push(1);
+
+    while(!q.empty()){
+        int p = q.front();q.pop();
+        inQ[p] = false;
+        for(Edge & edge : grid[p]){
+            if(minDst[edge.to] > minDst[p] + edge.val){
+                minDst[edge.to] = minDst[p] + edge.val;
+                if(inQ[edge.to] == false){
+                    q.push(edge.to);
+                    inQ[edge.to] = true;
+                }
+            }
+        }
+    }
+    
+    if(minDst[n] == INT32_MAX) cout << "unconnected" << "\n";
+    else cout << minDst[n] << "\n";
+    
+    return 0;
+}
+```
+
+### 城市间货物运输 I(Bellman_ford 队列优化 判断负权回路)
+
+```C++
+#include <iostream>
+#include <string>
+#include <vector>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <sstream>
+#include <set>
+#include <list>
+#include <stdint.h>
+
+using namespace std;
+
+struct Edge{
+    int to;
+    int val;
+    Edge(int a,int b):to(a),val(b){}
+};
+
+
+int main(){
+
+    int n,m;
+    cin >> n >> m;
+
+    vector<list<Edge>> grid(n + 1);
+
+    for(int i = 0;i < m;i++){
+        int p1,p2,val;
+        cin >> p1 >> p2 >> val;
+        grid[p1].push_back(Edge(p2,val));
+    }
+
+    vector<int> inQ(n + 1,false);
+    
+    vector<int> minDst(n + 1,INT32_MAX);
+    
+    queue<int> q;
+    bool flag = false;
+    minDst[1] = 0;
+    q.push(1);
+    inQ[1]++;
+    while(!q.empty()){
+        int p = q.front();q.pop();
+
+        for(Edge & edge : grid[p]){
+            if(minDst[edge.to] > minDst[p] + edge.val){
+                minDst[edge.to] = minDst[p] + edge.val;
+                q.push(edge.to);
+                inQ[edge.to]++;
+                if(inQ[edge.to] == n){
+                    flag = true;
+                    while(!q.empty()) q.pop();
+                    break;
+                }
+            }
+        }
+    }
+    
+    if(flag) cout << "circle" << "\n";
+    else if(minDst[n] == INT32_MAX) cout << "unconnected" << "\n";
+    else cout << minDst[n] << "\n";
+    
+    return 0;
+}
+```
+
+### bellman_ford之单源有限最短路
+
+```C++
+#include <iostream>
+#include <string>
+#include <vector>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <sstream>
+#include <set>
+#include <list>
+#include <stdint.h>
+
+using namespace std;
+
+
+int main(){
+
+    int n,m;
+    cin >> n >> m;
+
+    vector<vector<int>> grid;
+
+    for(int i = 0;i < m;i++){
+        int p1,p2,val;
+        cin >> p1 >> p2 >> val;
+        grid.push_back({p1,p2,val});
+    }
+
+    int src,dst,k;
+    cin >> src >> dst >> k;
+
+    vector<int> midDst(n + 1,INT32_MAX);
+
+    midDst[src] = 0;
+
+    for(int i = 0;i <= k;i++){
+        vector<int> midDst_copy = midDst;
+        for(vector<int> & side : grid){
+            int from = side[0];
+            int to = side[1];
+            int val = side[2];
+
+            if(midDst_copy[from] != INT32_MAX && midDst[to] > midDst_copy[from] + val){
+                midDst[to] = midDst_copy[from] + val;
+            }
+        }
+    }    
+    
+    if(midDst[dst] == INT32_MAX) cout << "unreachable" << endl;
+    else cout << midDst[dst] << endl;
+    
+    return 0;
+}
+```
+
+### Floyd 算法
+
+```C++
+#include <iostream>
+#include <string>
+#include <vector>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <sstream>
+#include <set>
+#include <list>
+#include <stdint.h>
+
+using namespace std;
+
+
+int main(){
+
+    int n,m;
+    cin >> n >> m;
+
+    vector<vector<vector<int>>> grid(n + 1,vector<vector<int>> (n + 1,vector<int>(n + 1,0x3fff)));
+    
+    for(int i = 0;i < m;i++){
+        int p1,p2,val;
+        cin >> p1 >> p2 >> val;
+        grid[p1][p2][0] = val;
+        grid[p2][p1][0] = val;
+    }
+
+    for(int k = 1;k <= n;k++){
+        for(int i = 1;i <= n;i++){
+            for(int j = 1;j <= n;j++){
+                grid[i][j][k] = min(grid[i][j][k - 1],grid[i][k][k - 1] + grid[k][j][k - 1]);
+            }
+        }
+    }
+
+
+    int q;
+
+    cin >> q;
+
+    while(q--){
+        int s,e;
+        cin >> s >> e;
+
+        if(grid[s][e][n] == 0x3fff) cout << -1 << "\n";
+        else cout << grid[s][e][n] << "\n";
+    }
+
+
+    return 0;
+}
+```
+
+### A*算法
+
+```C++
+#include <iostream>
+#include <string>
+#include <vector>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <sstream>
+#include <set>
+#include <list>
+#include <stdint.h>
+#include <string.h>
+
+using namespace std;
+
+int maps[1001][1001];
+
+int dt[8][2] = {-2,1,-2,-1,-1,2,-1,-2,1,2,1,-2,2,1,2,-1};
+
+int b1,b2;
+
+struct Knight{
+    int x,y;
+    int g,h,f;
+
+    bool operator < (const Knight & rhs) const{
+        return rhs.f < f;
+    }
+};
+
+int Heuristic(const Knight & k){
+    return (k.x - b1) * (k.x - b1) + (k.y - b2) * (k.y - b2);
+}
+
+priority_queue<Knight> q;
+
+void start(const Knight & k){
+    Knight cur,next;
+    q.push(k);
+
+    while(!q.empty()){
+        cur = q.top();q.pop();
+
+        if(cur.x == b1 && cur.y == b2) break;
+
+        for(int i = 0;i < 8;i++){
+            next.x = cur.x + dt[i][0];
+            next.y = cur.y + dt[i][1];
+
+            if(next.x < 1 || next.x > 1000 || next.y < 1 || next.y > 1000) continue;
+
+            if(!maps[next.x][next.y]){
+                maps[next.x][next.y] = maps[cur.x][cur.y] + 1;
+
+                next.g = cur.g + 5;
+                next.h = Heuristic(next);
+                next.f = next.g + next.h;
+                q.push(next);
+            }
+        }
+    }
+}
+
+
+int main(){
+    int n,a1,a2;
+
+    cin >> n;
+
+    for(int i = 0;i < n;i++){
+        cin >> a1 >> a2 >> b1 >> b2;
+        memset(maps,0,sizeof(maps));
+        Knight s;
+        s.x = a1;
+        s.y = a2;
+        s.g = 0;
+        s.h = Heuristic(s);
+        s.f = s.g + s.h;
+        start(s);
+        while(!q.empty()) q.pop();
+        cout << maps[b1][b2] << "\n";
+    }
+
+    return 0;
+}
+```
+
