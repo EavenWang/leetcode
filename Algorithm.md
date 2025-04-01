@@ -614,6 +614,31 @@ public:
 
 ### [28. 找出字符串中第一个匹配项的下标(KMP)](https://leetcode.cn/problems/find-the-index-of-the-first-occurrence-in-a-string/)
 
+```C++
+class Solution {
+public:
+    int strStr(string haystack, string needle) {
+       	vector<int> ne(needle.size(),-1);
+        
+        for(int i = 1,j = -1;i < needle.size();i++){
+            while(j != -1 && needle[i] != needle[j + 1]) j = ne[j];
+            if(needle[i] == needle[j + 1]) j++;
+            ne[i] = j;
+        }
+        
+        for(int i = 0,j = -1;i < haystack.size();i++){
+            while(j != -1 && haystack[i] != needle[j + 1]) j = ne[j];
+            if(haystack[i] == needle[j + 1])j++;
+            if(j == needle.size() - 1){
+                return i - needle.size();
+            }
+        }
+        
+        return -1;
+    }
+};
+```
+
 
 
 ### [27. 移除元素](https://leetcode.cn/problems/remove-element/)
@@ -6145,6 +6170,1640 @@ int main(){
         while(!q.empty()) q.pop();
         cout << maps[b1][b2] << "\n";
     }
+
+    return 0;
+}
+```
+
+### 快排
+
+```C++
+#include <iostream>
+#include <cstdio>
+
+using namespace std;
+
+const int N = 1e6 + 10;
+
+int q[N];
+
+void quick_sort(int q[],int l,int r){
+    if(l >= r) return;
+
+    int x = q[(l + r) / 2],i = l - 1,j = r + 1;
+
+    while(i < j){
+        do i++; while(q[i] < x);
+        do j--; while(q[j] > x);
+        if(i < j) swap(q[i],q[j]);
+    }
+
+    quick_sort(q,l,j);
+    quick_sort(q,j + 1,r);
+}
+
+int main(){
+
+    int n;
+    cin >> n;
+
+    for(int i = 0;i < n;i++) scanf("%d",&q[i]);
+    quick_sort(q,0,n - 1);
+    for(int i = 0;i < n;i++) printf("%d ",q[i]);
+    return 0;
+
+}
+```
+
+### 第k个数
+
+```C++
+#include <iostream>
+#include <cstdio>
+
+using namespace std;
+
+const int N = 1e6 + 10;
+
+int q[N];
+
+int k;
+
+int quick_sort(int l,int r,int k){
+    if(l >= r) return q[l];
+
+    int x = q[(l + r) / 2],i = l - 1,j = r + 1;
+
+    while(i < j){
+        do i++; while(q[i] < x);
+        do j--; while(q[j] > x);
+        if(i < j) swap(q[i],q[j]);
+    }
+
+    int len = j - l + 1;
+    if(len >= k) return quick_sort(l,j,k);
+    else return quick_sort(j + 1,r,k - len);
+    
+}
+
+int main(){
+
+    int n;
+    cin >> n;
+    cin >> k;
+
+    for(int i = 0;i < n;i++) scanf("%d",&q[i]);
+    cout << quick_sort(0,n - 1,k);
+
+    return 0;
+
+}
+```
+
+### 归并排序
+
+```C++
+#include <iostream>
+#include <cstdio>
+
+using namespace std;
+
+const int N = 1e6 + 10;
+
+int q[N],tmp[N];
+
+
+void merge_sort(int l,int r){
+    if(l >= r) return;
+    
+    int mid = (l + r) >> 1;
+
+    merge_sort(l,mid);
+    merge_sort(mid + 1,r);
+
+    int i = l,j = mid + 1;
+    int k = 0;
+    while(i <= mid && j <= r){
+        if(q[i] < q[j]) tmp[k++] = q[i++];
+        else tmp[k++] = q[j++];
+    }
+
+    while(i <= mid) tmp[k++] = q[i++];
+    while(j <= r) tmp[k++] = q[j++];
+
+    for(int i = l,k = 0;i <= r;i++){
+        q[i] = tmp[k++];
+    }
+}
+
+int main(){
+
+    int n;
+    cin >> n;
+    for(int i = 0;i < n;i++) scanf("%d",&q[i]);
+
+    merge_sort(0,n - 1);
+
+    for(int i = 0;i < n;i++) printf("%d ",q[i]);
+
+    return 0;
+
+}
+```
+
+### 数的范围
+
+```C++
+#include <iostream>
+#include <cstdio>
+
+using namespace std;
+
+typedef long long LL;
+
+const int N = 1e6 + 10;
+
+int tp[N];
+
+
+int main(){
+
+    int n,q;
+    cin >> n >> q;
+    for(int i = 0;i < n;i++) scanf("%d",&tp[i]);
+
+    while(q--){
+        int x;
+        cin >> x;
+
+        int l = 0,r = n - 1;
+
+    
+        while(l < r){
+            int mid = l + r >> 1;
+            if(tp[mid] >= x) r = mid;
+            else l = mid + 1;
+        }
+
+        if(tp[l] != x){
+            cout << "-1 -1" << "\n";
+
+        } else{
+            cout << l << " ";
+
+            l = 0,r = n - 1;
+
+            while(l < r){
+                int mid = l + r + 1 >> 1;
+                if(tp[mid] <= x) l = mid;
+                else r = mid - 1;
+            }
+
+            cout << r << "\n";
+        }   
+    }
+    return 0;
+}
+```
+
+### 数的三次方根
+
+```C++
+#include <iostream>
+#include <cstdio>
+#include <cmath>
+
+using namespace std;
+
+typedef long long LL;
+
+const int N = 1e6 + 10;
+
+int tp[N];
+
+
+int main(){
+
+    double n;
+    cin >> n;
+    
+    double l = -1000,r = 1000;
+
+    while(abs(r - l) > 1e-8){
+        double mid = (l + r) / 2;
+        if(mid * mid * mid < n) l = mid;
+        else r = mid;
+    }
+
+    printf("%.6lf",l);    
+
+    return 0;
+
+}
+```
+
+### 高精度加法
+
+```C++
+#include <iostream>
+#include <cstdio>
+#include <cmath>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+vector<int> add(vector<int> & A,vector<int> & B){
+    vector<int> C;
+    int t = 0;
+
+    for(int i = 0;i < A.size() || i < B.size();i++){
+        if(i < A.size()) t += A[i];
+        if(i < B.size()) t += B[i];
+
+        C.push_back(t % 10);
+        t /= 10;
+    }
+
+    if(t) C.push_back(t);
+
+    while(C.back() == 0 && C.size() > 1) C.pop_back();
+
+    return C;
+}
+
+int main(){
+
+    string a,b;
+    cin >> a >> b;
+
+    vector<int> A,B;
+
+    for(int i = a.size() - 1;i >= 0;i--) A.push_back(a[i] - '0');
+    for(int i = b.size() - 1;i >= 0;i--) B.push_back(b[i] - '0');
+
+    vector<int> C = add(A,B);
+
+    for(int i = C.size() - 1;i >= 0;i--){
+        cout << C[i];
+    }
+
+    return 0;
+
+}
+```
+
+### 高精度减法
+
+```C++
+#include <iostream>
+#include <cstdio>
+#include <cmath>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+bool cmp(vector<int> & A,vector<int> & B){
+    if(A.size() != B.size()) return (A.size() > B.size());
+
+    for(int i = A.size() - 1;i >= 0;i--){
+        if(A[i] != B[i]) return (A[i] > B[i]);
+    }
+
+    return true;
+}
+
+vector<int> sub(vector<int> & A,vector<int> & B){
+    vector<int> C;
+    int t = 0;
+
+    for(int i = 0;i < A.size();i++){
+        if(i < B.size()) t = A[i] - B[i] - t;
+        else t = A[i] - t;
+        C.push_back((t + 10) % 10);
+
+        if(t >= 0) t = 0;
+        else t = 1;
+    }
+
+    while(C.back() == 0 && C.size() > 1) C.pop_back();
+    return C;
+}
+
+
+int main(){
+
+    string a,b;
+    cin >> a >> b;
+
+    vector<int> A,B;
+
+    for(int i = a.size() - 1;i >= 0;i--) A.push_back(a[i] - '0');
+    for(int i = b.size() - 1;i >= 0;i--) B.push_back(b[i] - '0');
+
+    vector<int> C;
+
+    if(cmp(A,B)){
+        C = sub(A,B);
+    }else{
+        C = sub(B,A);
+        cout << "-";
+    }
+
+    for(int i = C.size() - 1;i >= 0;i--){
+        cout << C[i];
+    }
+
+    return 0;
+
+}
+```
+
+### 高精度乘法
+
+```C++
+#include <iostream>
+#include <cstdio>
+#include <cmath>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+
+vector<int> mul(vector<int> & A,int b){
+    vector<int> C;
+    int t = 0;
+
+    for(int i = 0;i < A.size() || t;i++){
+        if(i < A.size()) t = A[i] * b + t;
+        C.push_back(t % 10);    
+        t /= 10;
+    }
+
+    while(C.back() == 0 && C.size() > 1) C.pop_back();
+    return C;
+}
+
+
+int main(){
+
+    string a;
+    int b;
+    cin >> a >> b;
+
+    vector<int> A,B;
+
+    for(int i = a.size() - 1;i >= 0;i--) A.push_back(a[i] - '0');
+
+    vector<int> C = mul(A,b);
+
+    for(int i = C.size() - 1;i >= 0;i--){
+        cout << C[i];
+    }
+
+    return 0;
+
+}
+```
+
+### 高精度除法
+
+```C++
+#include <iostream>
+#include <cstdio>
+#include <cmath>
+#include <vector>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+
+vector<int> div(vector<int> & A,int b,int & r){
+    vector<int> C;
+    r = 0;
+    for(int i = A.size() - 1;i >= 0;i--){
+        C.push_back((r * 10 + A[i]) / b);
+        r = ((r * 10) + A[i]) % b;
+    }
+
+    reverse(C.begin(),C.end());
+
+    while(C.back() == 0 && C.size() > 1) C.pop_back();
+
+    return C;
+}
+
+
+int main(){
+
+    string a;
+    int b;
+    cin >> a >> b;
+
+    vector<int> A,B;
+
+    for(int i = a.size() - 1;i >= 0;i--) A.push_back(a[i] - '0');
+
+    int r;
+    vector<int> C = div(A,b,r);
+
+    for(int i = C.size() - 1;i >= 0;i--){
+        cout << C[i];
+    }
+
+    cout << "\n" << r;
+
+    return 0;
+
+}
+```
+
+### 前缀和
+
+```C++
+#include <iostream>
+#include <cstdio>
+#include <cmath>
+#include <vector>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+const int N = 1e5 + 10;
+
+int a[N],s[N];
+
+
+int main(){
+
+    int n,m;
+
+    cin >> n >> m;
+    for(int i = 1;i <= n;i++){
+        cin >> a[i];
+        s[i] = s[i - 1] + a[i];
+    }
+
+    while(m--){
+        int l,r;
+        scanf("%d%d",&l,&r);
+
+        printf("%d\n",s[r] - s[l - 1]);
+    }
+
+    return 0;
+
+}
+```
+
+### 子矩阵的和
+
+```C++
+#include <iostream>
+#include <cstdio>
+#include <cmath>
+#include <vector>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+const int N = 1010;
+
+int a[N][N],s[N][N];
+
+int main(){
+
+    int n,m,q;
+
+    cin >> n >> m >> q;
+    for(int i = 1;i <= n;i++){
+        for(int j = 1;j <= m;j++){
+            cin >> a[i][j];
+        }
+    }
+
+    for(int i = 1;i <= n;i++){
+        for(int j = 1;j <= m;j++){
+            s[i][j] = s[i - 1][j] + s[i][j - 1] - s[i - 1][j - 1] + a[i][j];
+        }
+    }
+
+    while(q--){
+        int x1,y1,x2,y2;
+        scanf("%d%d%d%d",&x1,&y1,&x2,&y2);
+        printf("%d\n",s[x2][y2] - s[x2][y1 - 1] - s[x1 - 1][y2] + s[x1 - 1][y1 - 1]);
+    }
+
+    return 0;
+
+}
+```
+
+### 差分
+
+```C++
+#include <iostream>
+#include <cstdio>
+#include <cmath>
+#include <vector>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+const int N = 1e5 + 10;
+
+int a[N],b[N];
+
+int main(){
+
+    int n,m;
+
+    cin >> n >> m;
+    for(int i = 1;i <= n;i++){
+        cin >> a[i];
+        b[i] += a[i];
+        b[i + 1] -= a[i];
+    }
+
+    while(m--){
+        int l,r,c;
+        cin >> l >> r >> c;
+        b[l] += c;
+        b[r + 1] -= c;
+    }
+
+    for(int i = 1;i <= n;i++){
+        a[i] = a[i - 1] + b[i];
+        cout << a[i] << " ";
+    }
+
+
+    return 0;
+
+}
+```
+
+### 差分矩阵
+
+```C++
+#include <iostream>
+#include <cstdio>
+#include <cmath>
+#include <vector>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+const int N = 1010;
+
+int a[N][N],b[N][N];
+
+int main(){
+
+    int n,m,q;
+
+    cin >> n >> m >> q;
+    for(int i = 1;i <= n;i++){
+        for(int j = 1;j <= m;j++){
+            cin >> a[i][j];
+            b[i][j] += a[i][j];
+            b[i + 1][j] -= a[i][j];
+            b[i][j + 1] -= a[i][j];
+            b[i + 1][j + 1] += a[i][j];
+        }
+    }
+    
+    while(q--){
+        int x1,y1,x2,y2,c;
+        scanf("%d%d%d%d%d",&x1,&y1,&x2,&y2,&c);
+
+        b[x1][y1] += c;
+        b[x2 + 1][y1] -= c;
+        b[x1][y2 + 1] -= c;
+        b[x2 + 1][y2 + 1] += c;
+    }
+
+    for(int i = 1;i <= n;i++){
+        for(int j = 1;j <= m;j++){
+            a[i][j] = a[i - 1][j] + a[i][j - 1] - a[i - 1][j - 1] + b[i][j];
+            cout << a[i][j] << " ";
+        }
+        cout << "\n";
+    }
+
+    return 0;
+
+}
+```
+
+### 最长连续不重复子串
+
+```C++
+#include <iostream>
+#include <cstdio>
+#include <cmath>
+#include <vector>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+const int N = 1e5 + 10;
+
+int a[N],s[N];
+
+int main(){
+    int n;
+    cin >> n;
+
+    int l = 0;
+    int j = 0;
+    for(int i = 0;i < n;i++){
+        scanf("%d",&a[i]);
+        s[a[i]]++;
+        while(s[a[i]] > 1) s[a[j++]]--;
+        l = max(l,i - j + 1);
+    }
+    
+    cout << l;
+    return 0;
+
+}
+```
+
+### 数组元素的目标和
+
+```C++
+#include <iostream>
+#include <cstdio>
+#include <cmath>
+#include <vector>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+const int N = 1e5 + 10;
+
+int a[N],b[N];
+
+int main(){
+    int n,m,x;
+    cin >> n >> m >> x;
+    for(int i = 0;i < n;i++) cin >> a[i];
+    for(int i = 0;i < m;i++) cin >> b[i];
+
+    
+    for(int i = 0,j = m - 1;i < n;i++){
+        while(j >= 0 && a[i] + b[j] > x) j--;
+        if(a[i] + b[j] == x){
+            cout << i << " " << j;
+            break;
+        }
+        
+    }
+
+    return 0;
+
+}
+```
+
+### 判断子序列
+
+```C++
+#include <iostream>
+#include <cstdio>
+#include <cmath>
+#include <vector>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+const int N = 1e5 + 10;
+
+int a[N],b[N];
+
+int main(){
+    int n,m,x;
+    cin >> n >> m;
+    for(int i = 0;i < n;i++) cin >> a[i];
+    for(int i = 0;i < m;i++) cin >> b[i];
+
+    int j = 0;
+    for(int i = 0;i < m;i++){
+        if(b[i] == a[j]) j++;
+        if(j == n) break;
+    }
+
+    if(j == n) cout << "Yes";
+    else cout << "No";
+
+    return 0;
+
+}
+```
+
+### 二进制中1的个数
+
+```C++
+#include <iostream>
+#include <cstdio>
+#include <cmath>
+#include <vector>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+int lowbit(int x){
+    return (x & -x);
+}
+
+int main(){
+    int n;
+
+    cin >> n;
+
+    while(n--){
+        int x;
+
+        cin >> x;
+        int res = 0;
+        while(x > 0){
+            x -= lowbit(x);
+            res++;
+        }
+        cout << res << " ";
+    }
+
+    return 0;
+
+}
+```
+
+### 区间和
+
+```C++
+#include <iostream>
+#include <cstdio>
+#include <cmath>
+#include <vector>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+typedef pair<int,int> PII;
+
+const int N = 300010;
+
+int a[N];
+int s[N];
+
+vector<int> alls;
+vector<PII> add;
+vector<PII> query;
+
+int find(int x){
+
+    int l = 0,r = alls.size() - 1;
+
+    while(l < r){
+        int mid = l + r >> 1;
+
+        if(alls[mid] >= x) r = mid;
+        else l = mid + 1;
+    }
+
+    return r + 1;
+}
+
+int main(){
+    int n,m;
+
+    cin >> n >> m;
+
+    for(int i = 0;i < n;i++){
+        int x,c;
+        cin >> x >> c;
+        alls.push_back(x);
+        add.push_back({x,c});
+    }
+
+    for(int i = 0;i < m;i++){
+        int l,r;
+        cin >> l >> r;
+        alls.push_back(l);
+        alls.push_back(r);
+        query.push_back({l,r});
+    }
+
+    sort(alls.begin(),alls.end());
+
+    alls.erase(unique(alls.begin(),alls.end()),alls.end());
+
+    for(auto & it : add){
+        int x = find(it.first);
+        a[x] += it.second;
+    }
+
+    for(int i = 1;i <= alls.size();i++) s[i] = s[i - 1] + a[i];
+
+    for(auto & it : query){
+        int l = find(it.first);
+        int r = find(it.second);
+        cout << s[r] - s[l - 1] << "\n";
+    }
+
+    return 0;
+
+}
+```
+
+### 区间合并
+
+```C++
+#include <iostream>
+#include <cstdio>
+#include <cmath>
+#include <vector>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+typedef pair<int,int> PII;
+
+vector<PII> alls;
+
+int main(){
+    int n,m;
+
+    cin >> n;
+
+    for(int i = 0;i < n;i++){
+        int l,r;
+        cin >> l >> r;
+
+        alls.push_back({l,r});
+    }
+
+    sort(alls.begin(),alls.end());
+
+    int st = -2e9,ed = -2e9;
+
+    vector<PII> res;
+    for(int i = 0;i < alls.size();i++){
+        int l = alls[i].first;
+        int r = alls[i].second;
+
+        if(l > ed){
+            if(st != -2e9) res.push_back({st,ed});
+            st = l,ed = r; 
+        }else{
+            ed = max(ed,r);
+        }
+    }
+   
+    res.push_back({st,ed});
+    cout << res.size();
+
+    return 0;
+
+}
+```
+
+### 单链表
+
+```C++
+#include <iostream>
+#include <cstdio>
+#include <cmath>
+#include <vector>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+const int N = 1e5 + 10;
+
+int head,idx;
+
+int e[N],ne[N];
+
+void init(){
+    head = -1;
+    idx = 0;
+}
+
+void add_to_head(int x){
+    e[idx] = x;
+    ne[idx] = head;
+    head = idx;
+    idx++;
+}
+
+void add(int k,int x){
+    e[idx] = x;
+    ne[idx] = ne[k - 1];
+    ne[k - 1] = idx;
+    idx++;
+}
+
+void del(int k){
+    if(k == 0){
+        if(head != -1) head = ne[head];
+    }else{
+        ne[k - 1] = ne[ne[k - 1]];
+    }
+}
+
+
+int main(){
+    int m;
+
+    init();
+
+    cin >> m;
+
+    while(m--){
+        char c;
+        cin >> c;
+        if(c == 'H'){
+            int x;
+            cin >> x;
+            add_to_head(x);
+        }else if(c == 'D'){
+            int k;
+            cin >> k;
+            del(k);
+        }else{
+            int k,x;
+            cin >> k >> x;
+            add(k,x);
+        }
+    }
+    
+    for(int i = head;i != -1;i = ne[i]){
+        cout << e[i] << " ";
+    }
+
+    return 0;
+
+}
+```
+
+### 双链表
+
+```C++
+#include <iostream>
+#include <cstdio>
+#include <cmath>
+#include <vector>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+const int N = 1e5 + 10;
+
+int idx;
+
+int l[N],r[N];
+
+int e[N];
+
+void init(){
+    r[0] = 1;
+    l[1] = 0;
+    idx = 2;
+}
+
+void add(int k,int x){
+    e[idx] = x;
+    l[idx] = k;
+    r[idx] = r[k];
+    l[r[k]] = idx;
+    r[k] = idx;
+    idx++;
+}
+
+void del(int k){
+    r[l[k]] = r[k];
+    l[r[k]] = l[k];
+}
+
+int main(){
+    int m;
+    init();
+
+    cin >> m;
+
+    while(m--){
+        string c;
+
+        cin >> c;
+
+        if(c == "L"){
+            int x;
+            cin >> x;
+
+            add(0,x);
+        }else if(c == "R"){
+            int x;
+            cin >> x;
+            add(l[1],x);
+        }else if(c == "D"){
+            int k;
+            cin >> k;
+            del(k + 1);
+        }else if(c == "IL"){
+            int k,x;
+            cin >> k >> x;
+            add(l[k + 1],x);
+        }else{
+            int k,x;
+            cin >> k >> x;
+            add(k + 1,x);
+        }
+    }
+    
+    for(int i = r[0];i != 1;i = r[i]){
+        cout << e[i] << " ";
+    }
+
+    return 0;
+
+}
+```
+
+### 栈
+
+```C++
+#include <iostream>
+#include <cstdio>
+#include <cmath>
+#include <vector>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+const int N = 1e5 + 10;
+
+int st[N],tt;
+
+void push(int x){
+    st[++tt] = x;
+}
+
+void pop(){
+    tt--;
+}
+
+bool empty(){
+    if(tt <= 0) return true;
+    else return false;
+}
+
+int query(){
+    return st[tt];
+}
+
+
+int main(){
+    int m;
+    
+    cin >> m;
+
+    while(m--){
+        string c;
+
+        cin >> c;
+
+        if(c == "push"){
+            int x;
+            cin >> x;
+            push(x);
+        }else if(c == "query"){
+            cout << query() << "\n";
+        }else if(c == "pop"){
+            pop();
+        }else{
+            if(empty()){
+                cout << "YES" << "\n";
+            }else{
+                cout << "NO" << "\n";
+            }
+        }
+    }
+    
+    return 0;
+}
+```
+
+### 表达式求值
+
+```C++
+#include <iostream>
+#include <cstdio>
+#include <cmath>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <stack>
+#include <unordered_map>
+
+using namespace std;
+
+stack<char> op;
+stack<int> num;
+
+void eval(){
+    int b = num.top();num.pop();
+    int a = num.top();num.pop();
+
+    char c = op.top();op.pop();
+
+    int x ;
+    if(c == '+') x = a + b;
+    else if(c == '-') x = a - b;
+    else if(c == '*') x = a * b;
+    else x = a / b;
+    num.push(x);
+}
+
+int main(){
+    string s;
+    cin >> s;
+    
+    unordered_map<char,int> pr{{'+',1},{'-',1},{'*',2},{'/',2}};
+
+    for(int i = 0;i < s.size();i++){
+        char c = s[i];
+        if(isdigit(c)){
+            int x = 0,j = i;
+            while(j < s.size() && isdigit(s[j])){
+                x = x * 10 + (s[j++] - '0');
+            }
+            i = j - 1;
+            num.push(x);
+        }else if(c == '(') op.push(c);
+        else if(c == ')'){
+            while(op.top() != '(') eval();
+            op.pop();
+        }else{
+            while(op.size() > 0 && op.top() != '(' && pr[op.top()] >= pr[c]) eval();
+            op.push(c);
+        }
+    }
+
+    while(op.size() > 0) eval();
+    cout << num.top() << "\n";
+    
+    return 0;
+}
+```
+
+### 模拟队列
+
+```C++
+#include <iostream>
+#include <cstdio>
+#include <cmath>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <stack>
+#include <unordered_map>
+
+using namespace std;
+
+const int N = 1e5 + 10;
+
+int q[N];
+
+int hh = 0;
+int tt = -1;
+
+void push(int x){
+    q[++tt] = x;
+}
+
+void pop(){
+    hh++;
+}
+
+bool empty(){
+    if(tt < hh) return true;
+    else return false;
+}
+
+void query(){
+    cout << q[hh] << "\n";
+}
+
+int main(){
+    int m;
+    cin >> m;
+    while(m--){
+        string s;
+        cin >> s;
+        if(s == "push"){
+            int x;
+            cin >> x;
+            push(x);
+        }else if(s == "empty"){
+            if(empty()){
+                cout << "YES" << "\n";
+            }else{
+                cout << "NO" << "\n";
+            }
+        }else if(s == "pop"){
+            pop();
+        }else{
+            query();
+        }
+    }
+    
+    return 0;
+}
+```
+
+### 单调栈
+
+```C++
+#include <iostream>
+#include <cstdio>
+#include <cmath>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <stack>
+#include <unordered_map>
+
+using namespace std;
+
+const int N = 1e5 + 10;
+
+int tt = 0;
+
+int q[N];
+
+int main(){
+    int n;
+
+    cin >> n;
+
+    for(int i = 0;i < n;i++){
+        int x;
+        cin >> x;
+        while(tt && q[tt] >=x) tt--;
+        if(!tt) printf("-1 ");
+        else printf("%d ",q[tt]);
+
+        q[++tt] = x;
+    }
+
+    return 0;
+}
+```
+
+### 单调队列
+
+```C++
+#include <iostream>
+#include <cstdio>
+#include <cmath>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <stack>
+#include <unordered_map>
+
+using namespace std;
+
+const int N = 1e6 + 10;
+
+int hh = 0,tt = -1;
+int a[N],q[N];
+
+
+int main(){
+    int n,k;
+
+    cin >> n >> k;
+    for(int i = 0;i < n;i++) scanf("%d",&a[i]);
+
+    for(int i = 0;i < n;i++){
+        if(hh <= tt && i - k + 1 > q[hh]) hh++;
+        while(hh <= tt && a[q[tt]] >= a[i]) tt--;
+
+        q[++tt] = i;
+
+        if(i >= k - 1) printf("%d ",a[q[hh]]);
+    }
+
+    cout << "\n";
+
+    hh = 0,tt = -1;
+
+    for(int i = 0;i < n;i++){
+        if(hh <= tt && i - k + 1 > q[hh]) hh++;
+
+        while(hh <= tt && a[q[tt]] <= a[i]) tt--;
+
+        q[++tt] = i;
+
+        if(i >= k - 1) printf("%d ",a[q[hh]]);
+    }
+    
+    return 0;
+}
+```
+
+### KMP
+
+```C++
+#include <iostream>
+#include <cstdio>
+#include <cmath>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <stack>
+#include <unordered_map>
+
+using namespace std;
+
+const int N = 1e5 + 10;
+const int M = 1e6 + 10;
+
+int n,m;
+char s[M],p[N];
+int ne[N];
+
+int main(){
+    cin >> n >> p + 1 >> m >> s + 1;
+
+    for(int i = 2,j = 0;i <= n;i++){
+        while(j && p[i] != p[j + 1]) j = ne[j];
+        if(p[i] == p[j + 1]) j++;
+        ne[i] = j;
+    }
+
+    for(int i = 1,j = 0;i <= m;i++){
+        while(j && s[i] != p[j + 1]) j = ne[j];
+        if(s[i] == p[j + 1]) j++;
+        if(j == n){
+            printf("%d ",i - n);
+            j = ne[j];
+        }
+    }
+    return 0;
+}
+```
+
+### Trie字符串统计
+
+```C++
+#include <iostream>
+#include <cstdio>
+#include <cmath>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <stack>
+#include <unordered_map>
+
+using namespace std;
+
+const int N = 1e5 + 10;
+
+int idx;
+int son[N][26],cnt[N];
+char str[N];
+
+void insert(char * str){
+    int p = 0;
+    for(int i = 0;str[i];i++){
+        int u = str[i] - 'a';
+        if(!son[p][u]) son[p][u] = ++idx;
+        p = son[p][u];
+    }
+    cnt[p]++;
+}
+
+int query(char * str){
+    int p = 0;
+    for(int i = 0;str[i];i++){
+        int u = str[i] - 'a';
+        if(!son[p][u]) return 0;
+        p = son[p][u];
+    }
+    return cnt[p];
+}
+
+int main(){
+    int n;
+    cin >> n;
+
+    while(n--){
+        char op[2];
+        scanf("%s%s",op,str);
+        if(*op == 'I'){
+            insert(str);
+        }else{
+            printf("%d\n",query(str));
+        }
+    }
+    
+    return 0;
+}
+```
+
+### 最大异或对
+
+```C++
+#include <iostream>
+#include <cstdio>
+#include <cmath>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <stack>
+#include <unordered_map>
+
+using namespace std;
+
+const int N = 1e5 + 10;
+
+int idx;
+int son[N * 31][2];
+char str[N];
+
+void insert(int x){
+    int p = 0;
+
+    for(int i = 30;i >= 0;i--){
+        int u = x >> i & 1;
+        if(!son[p][u]) son[p][u] = ++idx;
+        p = son[p][u];
+    }
+}
+
+int query(int x){
+    int p = 0;
+    int ret = 0;
+
+    for(int i = 30;i >= 0;i--){
+        int u = x >> i & 1;
+
+        if(son[p][!u]){
+            p = son[p][!u];
+            ret = ret * 2 + !u;
+        }else{
+            p = son[p][u];
+            ret = ret * 2 + u;
+        }
+    }
+
+    ret = ret ^ x;
+    return ret;
+}
+
+int main(){
+    int n;
+    cin >> n;
+    int maxXorNum = 0;
+    int x;
+    for(int i = 0;i < n;i++){
+        cin >> x;
+        insert(x);
+        maxXorNum = max(maxXorNum,query(x));
+    }
+    cout << maxXorNum;
+    
+    return 0;
+}
+```
+
+### 并查集
+
+```C++
+#include <iostream>
+#include <cstdio>
+#include <cmath>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <stack>
+#include <unordered_map>
+
+using namespace std;
+
+const int N = 1e5 + 10;
+
+int p[N];
+
+int find(int x){
+    if(p[x] != x) p[x] = find(p[x]);
+    return p[x];
+}
+
+int main(){
+    int n,m;
+    cin >> n >> m;
+
+    for(int i = 1;i <= n;i++) p[i] = i;
+
+    while(m--){
+        char op[2];
+        int a,b;
+
+        scanf("%s%d%d",op,&a,&b);
+
+        if(*op == 'M'){
+            p[find(a)] = find(b);
+        }else{
+            if(find(a) == find(b)){
+                cout << "Yes" << "\n";
+            }else{
+                cout << "No" << "\n";
+            }
+        }
+    }
+
+    return 0;
+}
+```
+
+### 连通块中点的数量
+
+```C++
+#include <iostream>
+#include <cstdio>
+#include <cmath>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <stack>
+#include <unordered_map>
+
+using namespace std;
+
+const int N = 1e5 + 10;
+
+int p[N];
+int cnt[N];
+
+int find(int x){
+    if(p[x] != x) p[x] = find(p[x]);
+    return p[x];
+}
+
+int main(){
+    int n,m;
+    cin >> n >> m;
+
+    for(int i = 1;i <= n;i++){
+        p[i] = i;
+        cnt[i] = 1;
+    } 
+
+    while(m--){
+        char op[3];
+        scanf("%s",op);
+
+        if(*op == 'C'){
+            int a,b;
+            cin >> a >> b;
+            if(find(a) == find(b)) continue;
+            cnt[find(b)] += cnt[find(a)];
+            p[find(a)] = find(b);
+        }else if(op[1] == '1'){
+            int a,b;
+            cin >> a >> b;
+            if(find(a) == find(b)){
+                cout << "Yes\n";
+            }else{
+                cout << "No\n";
+            }
+        }else{
+            int a;
+            cin >> a;
+            cout << cnt[find(a)] << "\n";
+        }
+    }
+
 
     return 0;
 }
